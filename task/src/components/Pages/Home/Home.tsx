@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
-const App: FC = () => {
+const Home: FC = () => {
   return <div>123</div>;
 };
 
-export default App;
+export default Home;
