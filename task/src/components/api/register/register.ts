@@ -5,7 +5,7 @@ import {IUserAuthProps} from '@src/types';
 
 import axios from '../index';
 
-const Login = async <T>({
+const Register = async <T>({
   email,
   password,
   push,
@@ -13,7 +13,7 @@ const Login = async <T>({
   setUser,
 }: IUserAuthProps<T>) => {
   try {
-    await axios.post('/login', {
+    await axios.post('/register', {
       email,
       password,
       id: uuidv4(),
@@ -30,4 +30,4 @@ const Login = async <T>({
   }
 };
 
-export default Login;
+export default Register;
