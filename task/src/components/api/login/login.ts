@@ -20,6 +20,7 @@ const Login = async <T>({
     });
     setUser(email);
     setError('');
+    push('/');
   } catch (error: unknown) {
     if (isAxiosError(error)) {
       const axiosError = error as AxiosError;

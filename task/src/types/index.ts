@@ -20,3 +20,8 @@ export interface IUserAuthProps<T> {
 const axiosError = (error: unknown): error is AxiosError => {
   return error instanceof AxiosError;
 };
+
+export interface IAuthData {
+  email: email;
+  password: password;
+}
