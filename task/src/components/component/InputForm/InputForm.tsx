@@ -1,7 +1,7 @@
 import {FC, memo} from 'react';
 import {FieldProps} from 'formik';
 
-import {TextField} from '@mui/material';
+import ChatContentMessage from './InputForm_style';
 
 export interface IInputFormProps {
   label: string;
@@ -18,7 +18,7 @@ const InputForm: FC<IInputFormProps & FieldProps> = ({
   touched,
 }) => {
   return (
-    <TextField
+    <ChatContentMessage
       {...field}
       label={label}
       fullWidth
