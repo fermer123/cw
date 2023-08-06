@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
 import InputForm from '@src/components/component/InputForm/InputForm';
+import NavigateLabel from '@src/components/component/NavigateLabel/NavigateLabel';
 import PostButton from '@src/components/component/PostButton/PostButton';
 import {IAuthData} from '@src/types';
 
@@ -41,7 +42,7 @@ const Login: FC = () => {
 
   const switchAuthForm = useCallback(() => {
     setErrorLogin('');
-    push('/login');
+    push('/register');
   }, [push]);
 
   return (
@@ -77,6 +78,10 @@ const Login: FC = () => {
               label='LOG IN'
             />
             {!!errorLogin && <ErrorAlert label={errorLogin} color='error' />}
+            <NavigateLabel
+              label='don`t have an account?'
+              switchAuth={switchAuthForm}
+            />
           </Auth>
         </Form>
       )}

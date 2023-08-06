@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
 import InputForm from '@src/components/component/InputForm/InputForm';
+import NavigateLabel from '@src/components/component/NavigateLabel/NavigateLabel';
 import PostButton from '@src/components/component/PostButton/PostButton';
 import {IAuthData} from '@src/types';
 
@@ -31,7 +32,7 @@ const Register: FC = () => {
     register({
       email: values.email,
       password: values.password,
-      setError: setErrorLogin,
+      setError: setErrorRegister,
       push,
       setUser,
     });
@@ -79,6 +80,10 @@ const Register: FC = () => {
             {!!errorRegister && (
               <ErrorAlert label={errorRegister} color='error' />
             )}
+            <NavigateLabel
+              label='already have an account?'
+              switchAuth={switchAuthForm}
+            />
           </Auth>
         </Form>
       )}
