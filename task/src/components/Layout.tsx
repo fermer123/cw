@@ -1,11 +1,15 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
+import useLocalStorage from './component/Hook/UseLocalStorage/useLocalStorage';
+import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
+
 const Register = lazy(() => import('./Pages/Register/Register'));
 const Login = lazy(() => import('./Pages/Login/Login'));
 const Home = lazy(() => import('./Pages/Home/Home'));
 
 const Layout: FC = () => {
+  const [user] = useLocalStorage<string>('user', '');
   return (
     <Routes>
       <Route
@@ -28,7 +32,9 @@ const Layout: FC = () => {
         path='/'
         element={
           <Suspense fallback='loading...'>
-            <Home />
+            <ProtectedRoute user={user}>
+              <Home />
+            </ProtectedRoute>
           </Suspense>
         }
       />

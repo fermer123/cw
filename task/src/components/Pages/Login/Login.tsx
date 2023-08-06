@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
 import InputForm from '@src/components/component/InputForm/InputForm';
+import PostButton from '@src/components/component/PostButton/PostButton';
 import {IAuthData} from '@src/types';
 
 import login from '../../api/login/login';
@@ -59,6 +60,16 @@ const Login: FC = () => {
               label='Введите пароль'
               name='password'
               component={InputForm}
+            />
+            <PostButton
+              disabled={
+                !dirty ||
+                isSubmitting ||
+                !!(errors.email && touched.email) ||
+                !!(errors.password && touched.password)
+              }
+              onSubmit={handleSubmit}
+              label='LOG IN'
             />
             {!!errorLogin && <ErrorAlert label={errorLogin} color='error' />}
           </Auth>
