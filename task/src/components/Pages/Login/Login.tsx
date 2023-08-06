@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
@@ -38,6 +38,11 @@ const Login: FC = () => {
     actions.resetForm();
     actions.setSubmitting(false);
   };
+
+  const switchAuthForm = useCallback(() => {
+    setErrorLogin('');
+    push('/login');
+  }, [push]);
 
   return (
     <Formik

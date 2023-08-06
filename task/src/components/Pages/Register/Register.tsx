@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import {Auth, ErrorAlert} from './Register_style';
 
 const Register: FC = () => {
   const [, setUser] = useLocalStorage('user', '');
-  const [errorLogin, setErrorLogin] = useState<string>('');
+  const [errorRegister, setErrorRegister] = useState<string>('');
   const push = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -38,6 +38,11 @@ const Register: FC = () => {
     actions.resetForm();
     actions.setSubmitting(false);
   };
+
+  const switchAuthForm = useCallback(() => {
+    setErrorRegister('');
+    push('/login');
+  }, [push]);
 
   return (
     <Formik
@@ -71,7 +76,9 @@ const Register: FC = () => {
               onSubmit={handleSubmit}
               label='SIGN IN'
             />
-            {!!errorLogin && <ErrorAlert label={errorLogin} color='error' />}
+            {!!errorRegister && (
+              <ErrorAlert label={errorRegister} color='error' />
+            )}
           </Auth>
         </Form>
       )}
