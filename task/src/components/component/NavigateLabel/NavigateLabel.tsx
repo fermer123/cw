@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 
 import LabelNavigate from './NavigateLabel_style';
 
@@ -15,4 +15,4 @@ const NavigateLabel: FC<INavigateLabel> = ({label, switchAuth}) => {
   );
 };
 
-export default NavigateLabel;
+export default memo(NavigateLabel);
