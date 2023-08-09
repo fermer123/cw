@@ -1,7 +1,8 @@
 import {FC, memo} from 'react';
 
 import LoginIcon from '@mui/icons-material/Login';
-import Button from '@mui/material/Button';
+
+import PostAuthButton from './PostButton_style';
 
 export interface IPostButtonProps {
   disabled: boolean;
@@ -11,7 +12,7 @@ export interface IPostButtonProps {
 
 const PostButton: FC<IPostButtonProps> = ({disabled, onSubmit, label}) => {
   return (
-    <Button
+    <PostAuthButton
       data-testid='postData'
       type='submit'
       onClick={onSubmit}
@@ -20,7 +21,7 @@ const PostButton: FC<IPostButtonProps> = ({disabled, onSubmit, label}) => {
       fullWidth
       endIcon={<LoginIcon />}>
       {label}
-    </Button>
+    </PostAuthButton>
   );
 };
 
