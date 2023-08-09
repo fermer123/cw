@@ -17,9 +17,12 @@ const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
       const newValue = value instanceof Function ? value(storedValue) : value;
       window.localStorage.setItem(key, JSON.stringify(newValue));
       setStoredValue(newValue);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      // console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error(error as string);
+      }
     }
   };
 
