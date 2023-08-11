@@ -2,6 +2,7 @@ import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
 import useLocalStorage from './component/Hook/UseLocalStorage/useLocalStorage';
+import LoadingSpinner from './component/Loading/LoadingSpinner';
 import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
 
 const Register = lazy(() => import('./Pages/Register/Register'));
@@ -15,7 +16,7 @@ const Layout: FC = () => {
       <Route
         path='/register'
         element={
-          <Suspense fallback='loading...'>
+          <Suspense fallback={<LoadingSpinner />}>
             <Register />
           </Suspense>
         }
@@ -23,7 +24,7 @@ const Layout: FC = () => {
       <Route
         path='/login'
         element={
-          <Suspense fallback='loading...'>
+          <Suspense fallback={<LoadingSpinner />}>
             <Login />
           </Suspense>
         }
@@ -31,7 +32,7 @@ const Layout: FC = () => {
       <Route
         path='/'
         element={
-          <Suspense fallback='loading...'>
+          <Suspense fallback={<LoadingSpinner />}>
             <ProtectedRoute user={user}>
               <Home />
             </ProtectedRoute>
