@@ -7,3 +7,7 @@ export interface IAuth {
 export interface IUserData {
   users: IAuth[];
 }
+
+export interface IWords {
+  words: Array<string>;
+}

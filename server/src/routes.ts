@@ -1,22 +1,32 @@
 import express, {Request, Response} from 'express';
-import bodyParser from 'body-parser';
+import bodyParser, {json} from 'body-parser';
 const router = express.Router();
 const jsonParser = bodyParser.json();
-import {USERS_JSON_FILE} from './constants/constants';
+import {USERS_JSON_FILE, WORDS_JSON_FILE} from './constants/constants';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
-import {IAuth, IUserData} from './types';
+import {IAuth, IUserData, IWords} from './types';
 
 let users: IAuth[] = [];
-
+let words: Array<string> = [];
 if (fs.existsSync(USERS_JSON_FILE)) {
   const userData = fs.readFileSync(USERS_JSON_FILE, 'utf8');
   const parsedUserData: IUserData = JSON.parse(userData);
   users = parsedUserData.users;
 }
 
+if (fs.existsSync(USERS_JSON_FILE)) {
+  const wordsData = fs.readFileSync(WORDS_JSON_FILE, 'utf8');
+  const parsedUserData: IWords = JSON.parse(wordsData);
+  words = parsedUserData.words;
+}
+
 router.get('/', (req: Request, res: Response) => {
   res.json(`users:  ${JSON.stringify(users)} `);
+});
+
+router.get('/words', (req: Request, res: Response) => {
+  res.json(JSON.stringify(words));
 });
 
 router.post('/login', jsonParser, async (req: Request, res: Response) => {
