@@ -1,4 +1,5 @@
 import {AxiosError} from 'axios';
+import {Dispatch, SetStateAction} from 'react';
 import {NavigateFunction} from 'react-router-dom';
 
 const axiosError = (error: unknown): error is AxiosError => {
@@ -19,10 +20,6 @@ export interface IAuthData {
   password: password;
 }
 
-type SetWords<T> = (
-  value: (T extends Object ? Object : unknown) | ((val: T) => T),
-) => void;
-
 export interface IUserAuthProps<T> {
   email: email;
   password: password;
@@ -31,7 +28,11 @@ export interface IUserAuthProps<T> {
   push: NavigateFunction;
 }
 
-export interface IWordsData<T> {
+export type IWords = string[];
+
+type SetWords = Dispatch<SetStateAction<IWords>>;
+
+export interface IWordsData {
   setError: SetError;
-  setWords: SetWords<T>;
+  setWords: SetWords;
 }

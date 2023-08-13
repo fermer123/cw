@@ -1,20 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import {AxiosError, isAxiosError} from 'axios';
+import {AxiosError, AxiosResponse, isAxiosError} from 'axios';
 
-import {IWordsData} from '@src/types';
+import {IWords, IWordsData} from '@src/types';
 
 import axios from '../index';
 
-const GetWords = async <T>({setError, setWords}: IWordsData<T>) => {
+const GetWords = async ({setError, setWords}: IWordsData) => {
   try {
-    const resp = await axios.get('/words');
-    setWords(resp);
+    const resp: AxiosResponse<IWords> = await axios.get('/words');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    setWords(resp.data);
   } catch (error: unknown) {
     if (isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      setError(String(axiosError.response?.data) ?? 'error');
+      setError(String(axiosError?.message) ?? 'error');
     } else {
-      setError(String(error) ?? 'error');
+      setError(String(error));
     }
   }
 };

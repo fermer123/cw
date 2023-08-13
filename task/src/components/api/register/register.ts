@@ -11,7 +11,7 @@ const Register = async <T>({
   push,
   setError,
   setUser,
-}: IUserAuthProps<T>) => {
+}: IUserAuthProps<T>): Promise<void> => {
   try {
     await axios.post('/register', {
       email,
