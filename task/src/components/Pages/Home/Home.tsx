@@ -4,10 +4,12 @@ import {FC, useCallback, useEffect, useState} from 'react';
 import GetWords from '@src/components/api/words/words';
 import {IWords} from '@src/types';
 
+import {EndGameLabel, HomeContainer} from './Home_style';
+
 const Home: FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [words, setWords] = useState<IWords | null>(null);
-
+  const [win, setWin] = useState<boolean>(false);
   useEffect(() => {
     GetWords({setError, setWords});
   }, []);
@@ -18,7 +20,11 @@ const Home: FC = () => {
     }
     return '';
   }, []);
-  return <div>home</div>;
+  return (
+    <HomeContainer>
+      <EndGameLabel>123</EndGameLabel>
+    </HomeContainer>
+  );
 };
 
 export default Home;

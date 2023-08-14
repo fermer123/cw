@@ -7,7 +7,6 @@ import axios from '../index';
 const GetWords = async ({setError, setWords}: IWordsData) => {
   try {
     const resp: AxiosResponse<IWords> = await axios.get('/words');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setWords(resp.data);
   } catch (error: unknown) {
     if (isAxiosError(error)) {
