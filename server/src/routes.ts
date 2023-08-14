@@ -26,7 +26,7 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.get('/words', (req: Request, res: Response) => {
-  res.json(JSON.stringify(words));
+  res.json(words);
 });
 
 router.post('/login', jsonParser, async (req: Request, res: Response) => {
