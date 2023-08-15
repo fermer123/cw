@@ -4,7 +4,7 @@ import {FC, useCallback, useEffect, useState} from 'react';
 import GetWords from '@src/components/api/words/words';
 import {IWords} from '@src/types';
 
-import {EndGameLabel, HomeContainer} from './Home_style';
+import {EndGameLabel, HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
   const [error, setError] = useState<string | null>(null);

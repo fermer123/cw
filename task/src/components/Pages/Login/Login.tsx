@@ -11,7 +11,7 @@ import {IAuthData} from '@src/types';
 
 import login from '../../api/login/login';
 
-import {Auth, ErrorAlert} from './Login_style';
+import {Auth, ErrorAlert} from './Login.styled';
 
 const Login: FC = () => {
   const [, setUser] = useLocalStorage('user', '');

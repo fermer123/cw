@@ -11,7 +11,7 @@ import {IAuthData} from '@src/types';
 
 import register from '../../api/register/register';
 
-import {Auth, ErrorAlert} from './Register_style';
+import {Auth, ErrorAlert} from './Register.styled';
 
 const Register: FC = () => {
   const [, setUser] = useLocalStorage('user', '');
