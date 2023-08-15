@@ -23,7 +23,7 @@ const Home: FC = () => {
     }
     return '';
   }, []);
-  const worker = new Worker('/test.ts');
+  const worker = new Worker(new URL('./test.ts', import.meta.url));
   const fn = () => {
     setResult('');
     setIsLoading(true);
@@ -40,6 +40,9 @@ const Home: FC = () => {
       {isLoading && <LoadingSpinner />}
       <button type='button' onClick={fn}>
         start
+      </button>
+      <button type='button' onClick={() => console.log('click')}>
+        click
       </button>
       <EndGameLabel>{result}</EndGameLabel>
     </HomeContainer>
