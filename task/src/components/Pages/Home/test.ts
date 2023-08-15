@@ -5,8 +5,10 @@ const heavyFunction = (): number => {
     sum += i;
   }
   console.timeEnd('heavyFunction');
-  // Вернуть результат вычислений
   return sum;
 };
 
-export default heavyFunction;
+self.onmessage = () => {
+  const result = heavyFunction();
+  postMessage(result);
+};

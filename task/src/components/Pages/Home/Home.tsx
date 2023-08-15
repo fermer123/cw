@@ -6,7 +6,6 @@ import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
 import {IWords} from '@src/types';
 
 import {EndGameLabel, HomeContainer} from './Home.styled';
-import heavyFunction from './test';
 
 const Home: FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -24,17 +23,16 @@ const Home: FC = () => {
     }
     return '';
   }, []);
-
+  const worker = new Worker('/test.ts');
   const fn = () => {
     setResult('');
     setIsLoading(true);
-    const worker = new Worker('worker.js');
-
-    worker.onmessage = (e) => {
-      setResult(String(e.data));
+    worker.onmessage = (event) => {
       setIsLoading(false);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+      setResult(event.data.toString());
     };
-    worker.postMessage({message: 'start'});
+    worker.postMessage(null);
   };
 
   return (
