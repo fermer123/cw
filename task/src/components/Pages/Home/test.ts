@@ -8,7 +8,7 @@ const heavyFunction = (): number => {
   return sum;
 };
 
-self.onmessage = () => {
+onmessage = () => {
   const result = heavyFunction();
   postMessage(result);
 };
