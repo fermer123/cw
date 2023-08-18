@@ -23,24 +23,10 @@ const Home: FC = () => {
     }
     return '';
   }, []);
-  const worker = new Worker(new URL('./test.ts', import.meta.url));
-  const fn = () => {
-    setResult('');
-    setIsLoading(true);
-    worker.onmessage = (event) => {
-      setIsLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      setResult(event.data.toString());
-    };
-    worker.postMessage(null);
-  };
 
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
-      <button type='button' onClick={fn}>
-        start
-      </button>
       <button type='button' onClick={() => console.log('click')}>
         click
       </button>
