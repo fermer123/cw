@@ -1,5 +1,5 @@
 #build
-build/
+/build/
 #node_modules
 node_modules/
 #snapshot 4 me
