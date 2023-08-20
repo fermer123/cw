@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 import {TextField} from '@mui/material';
-import colors from '@src/default_variables';
+import colors from '@styles/default_variables';
 
-const ChatContentMessage = styled(TextField)({
+const InputFormContent = styled(TextField)({
   '& .MuiInputLabel-outlined': {
     color: colors.default,
     borderColor: colors.default,
@@ -20,4 +20,4 @@ const ChatContentMessage = styled(TextField)({
     color: colors.default,
   },
 });
-export default ChatContentMessage;
+export default InputFormContent;

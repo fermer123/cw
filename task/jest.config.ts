@@ -7,7 +7,7 @@ const jestConfig: JestConfigWithTsJest = {
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
   coverageDirectory: '<rootDir>/coverage/',
-  testPathIgnorePatterns: ['<rootDir>/src/index.tsx'], // fix
+  testPathIgnorePatterns: ['<rootDir>/src/index.tsx'],
   transform: {
     // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
     // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
@@ -23,6 +23,7 @@ const jestConfig: JestConfigWithTsJest = {
     '^@src(.*)$': '<rootDir>/src$1',
     '@mui/styled-engine': '<rootDir>/node_modules/@mui/styled-engine-sc',
     uuid: require.resolve('uuid'),
+    '^@styles(.*)$': '<rootDir>/styles$1',
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['./src/jest.setup.ts'],

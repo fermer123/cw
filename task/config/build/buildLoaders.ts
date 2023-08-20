@@ -49,7 +49,6 @@ function buildLoaders(): RuleSetRule[] {
   //   use: [
   //     {
   //       loader: '@svgr/webpack',
-
   //       options: {
   //         typescript: true,
   //         ext: 'tsx',
