@@ -18,10 +18,18 @@ function buildLoaders(): RuleSetRule[] {
   // };
 
   // const cssLoader = {
-  //   test: /\.s[ac]ss$/i,
+  //   test: /\.s(a|c)ss$/,
   //   use: [
   //     options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-  //     'css-loader',
+  //     {
+  //       loader: 'css-loader',
+  //       options: {
+  //         modules: {
+  //           auto: (resourcePath: string) => Boolean(resourcePath.includes('.module.')),
+  //           localIdentName: options.isDev ? '[path][name]__[local]' : '[path][name]__[local]--[hash:base64:5]',
+  //         },
+  //       },
+  //     },
   //     'sass-loader',
   //   ],
   // };
