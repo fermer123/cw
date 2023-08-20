@@ -26,6 +26,30 @@ function buildLoaders(): RuleSetRule[] {
   //   ],
   // };
 
+  // const svgLoader = {
+  //   test: /\.svg$/i,
+  //   type: 'asset/resource',
+  //   resourceQuery: /url/,
+  //   generator: {
+  //     filename: 'assets/image/[name][ext]',
+  //   },
+  // };
+
+  // const svgrLoader = {
+  //   test: /\.svg/i,
+  //   resourceQuery: {not: [/url/]}, // exclude react component if *.svg?url
+  //   use: [
+  //     {
+  //       loader: '@svgr/webpack',
+
+  //       options: {
+  //         typescript: true,
+  //         ext: 'tsx',
+  //       },
+  //     },
+  //   ],
+  // };
+
   const typescriptLoader = {
     test: /\.tsx?$/,
     loader: 'ts-loader',
