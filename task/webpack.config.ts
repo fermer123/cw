@@ -1,21 +1,26 @@
 import path from 'path';
 
 import buildWebpackConfig from './config/build/buildWebpackConfig';
-import {BuildPaths} from './config/build/types/config';
+import {BuildEnv, BuildPaths} from './config/build/types/config';
 
-const paths: BuildPaths = {
-  entry: path.join(__dirname, 'src/index.tsx'),
-  output: path.join(__dirname, 'build'),
-  template: path.join(__dirname, 'public/index.html'),
-  analyzer: path.join(__dirname, 'dist/bundle-analysis.html'),
-  tsconfigPath: path.join(__dirname, 'tsconfig.json'),
+export default (env: BuildEnv) => {
+  const paths: BuildPaths = {
+    entry: path.join(__dirname, 'src/index.tsx'),
+    output: path.join(__dirname, 'build'),
+    template: path.join(__dirname, 'public/index.html'),
+    analyzer: path.join(__dirname, 'dist/bundle-analysis.html'),
+    tsconfigPath: path.join(__dirname, 'tsconfig.json'),
+  };
+
+  const mode = env.mode || 'development';
+  const port = env.port || 3001;
+  const isDev = mode === 'development';
+  const config = buildWebpackConfig({
+    mode,
+    paths,
+    isDev,
+    port,
+  });
+
+  return config;
 };
-
-const mode = 'development';
-const isDev = mode === 'development';
-const config = buildWebpackConfig({
-  paths,
-  isDev,
-});
-
-export default config;
