@@ -35,6 +35,7 @@
     "webpack.config.ts",
     "jest.config.ts",
     "./config",
-    "./styles"
+    "./styles",
+    "global.d.ts"
   ]
 }

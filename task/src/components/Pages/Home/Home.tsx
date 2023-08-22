@@ -9,7 +9,7 @@ import {HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
   const {data, isLoading} = useGetWordsQuery('');
-  console.log(data);
+  console.log(isDev);
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
