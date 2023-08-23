@@ -5,7 +5,7 @@ export const wordsApi = createApi({
   reducerPath: 'wordsApi',
   baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000/'}),
   endpoints: (build) => ({
-    getWords: build.query<IWords>({
+    getWords: build.query<IWords, number>({
       query: () => 'words',
     }),
   }),
