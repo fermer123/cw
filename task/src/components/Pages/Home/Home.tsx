@@ -8,15 +8,12 @@ import {IWords} from '@src/types';
 import {HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
-  const {data, isLoading} = useGetWordsQuery('');
-  console.log(isDev);
+  const {data: wordsData, isLoading} = useGetWordsQuery('');
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
       <ul>
-        {(data as IWords)?.map((e: string, idx: number) => (
-          <li key={idx}>{e}</li>
-        ))}
+        {wordsData?.map((e: string, idx: number) => <li key={idx}>{e}</li>)}
       </ul>
     </HomeContainer>
   );
