@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {FC, useState} from 'react';
+import {FC} from 'react';
 
 import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
 import {useGetWordsQuery} from '@src/store/wordsApi';
-import {IWords} from '@src/types';
 
 import {HomeContainer} from './Home.styled';
 
