@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {FC} from 'react';
 
 import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';

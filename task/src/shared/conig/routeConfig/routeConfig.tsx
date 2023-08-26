@@ -1,5 +1,9 @@
 import {RouteProps} from 'react-router-dom';
 
+import Home from '@src/pages/Home/Home';
+import Login from '@src/pages/Login/Login';
+import Register from '@src/pages/Register/Register';
+
 export enum AppRoutes {
   MAIN = 'main',
   LOGIN = 'login',
@@ -15,14 +19,14 @@ export const RoutePath: Record<AppRoutes, string> = {
 export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
-    element: <>123</>,
+    element: <Home />,
   },
   [AppRoutes.LOGIN]: {
     path: RoutePath.login,
-    element: <>123</>,
+    element: <Login />,
   },
   [AppRoutes.REGISTER]: {
     path: RoutePath.register,
-    element: <>123</>,
+    element: <Register />,
   },
 };
