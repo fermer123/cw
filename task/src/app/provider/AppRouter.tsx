@@ -3,7 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 
 import useLocalStorage from '@src/components/component/Hook/useLocalStorage/useLocalStorage';
 import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
-import ProtectedRoute from '@src/components/component/ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '@src/widgets/ProtectedRoute/ProtectedRoute';
 
 const Register = lazy(() => import('@src/pages/Register/Register'));
 const Login = lazy(() => import('@src/pages/Login/Login'));

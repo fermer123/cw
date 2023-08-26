@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 
 import {IAuthData} from '@src/app/types';
 import useLocalStorage from '@src/components/component/Hook/useLocalStorage/useLocalStorage';
-import InputForm from '@src/components/component/InputForm/InputForm';
-import NavigateLabel from '@src/components/component/NavigateLabel/NavigateLabel';
-import PostButton from '@src/components/component/PostButton/PostButton';
+import InputForm from '@src/widgets/InputForm/InputForm';
+import NavigateLabel from '@src/widgets/NavigateLabel/NavigateLabel';
+import PostButton from '@src/widgets/PostButton/PostButton';
 
-import register from '../../components/api/register/register';
+import register from '../../shared/api/register/register';
 
 import {Auth, ErrorAlert} from './Register.styled';
 
