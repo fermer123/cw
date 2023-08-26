@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
+import LoadingSpinner from '@src/entities/Loading/LoadingSpinner';
 import {useGetWordsQuery} from '@src/store/wordsApi';
 
 import {HomeContainer} from './Home.styled';

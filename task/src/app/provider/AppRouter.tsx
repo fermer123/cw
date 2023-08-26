@@ -1,8 +1,8 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-import useLocalStorage from '@src/components/component/Hook/useLocalStorage/useLocalStorage';
-import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
+import LoadingSpinner from '@src/entities/Loading/LoadingSpinner';
+import useLocalStorage from '@src/shared/hooks/useLocalStorage/useLocalStorage';
 import ProtectedRoute from '@src/widgets/ProtectedRoute/ProtectedRoute';
 
 const Register = lazy(() => import('@src/pages/Register/Register'));
