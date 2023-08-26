@@ -1,7 +1,7 @@
 import {AxiosError, isAxiosError} from 'axios';
 import {v4 as uuidv4} from 'uuid';
 
-import {IUserAuthProps} from '@src/types';
+import {IUserAuthProps} from '@src/app/types';
 
 import axios from '../index';
 

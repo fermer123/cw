@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
-import colors from '@styles/default_variables';
+import colors from '@src/app/styles/default_variables';
 
 const PostAuthButton = styled(Button)({
   '&:not(Mui-disabled)': {

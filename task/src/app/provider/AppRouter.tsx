@@ -1,16 +1,17 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-import useLocalStorage from './component/Hook/UseLocalStorage/useLocalStorage';
-import LoadingSpinner from './component/Loading/LoadingSpinner';
-import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
+import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
+import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
+import ProtectedRoute from '@src/components/component/ProtectedRoute/ProtectedRoute';
 
-const Register = lazy(() => import('./Pages/Register/Register'));
-const Login = lazy(() => import('./Pages/Login/Login'));
-const Home = lazy(() => import('./Pages/Home/Home'));
+const Register = lazy(() => import('@src/pages/Register/Register'));
+const Login = lazy(() => import('@src/pages/Login/Login'));
+const Home = lazy(() => import('@src/pages/Home/Home'));
 
-const Layout: FC = () => {
+const AppRouter: FC = () => {
   const [user] = useLocalStorage<string>('user', '');
+
   return (
     <Routes>
       <Route
@@ -43,4 +44,4 @@ const Layout: FC = () => {
   );
 };
 
-export default Layout;
+export default AppRouter;

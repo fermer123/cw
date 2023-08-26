@@ -1,13 +1,14 @@
-import {AxiosError} from 'axios';
 import {Dispatch, SetStateAction} from 'react';
+import {AxiosError} from 'axios';
 import {NavigateFunction} from 'react-router-dom';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const axiosError = (error: unknown): error is AxiosError => {
   return error instanceof AxiosError;
 };
 
-type email = string;
-type password = string;
+type TEmail = string;
+type TPassword = string;
 
 type SetError = (error: string) => void;
 
@@ -16,13 +17,13 @@ type SetUser<T> = (
 ) => void;
 
 export interface IAuthData {
-  email: email;
-  password: password;
+  email: TEmail;
+  password: TPassword;
 }
 
 export interface IUserAuthProps<T> {
-  email: email;
-  password: password;
+  email: TEmail;
+  password: TPassword;
   setError: SetError;
   setUser: SetUser<T>;
   push: NavigateFunction;

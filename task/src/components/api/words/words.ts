@@ -1,6 +1,6 @@
 import {AxiosError, AxiosResponse, isAxiosError} from 'axios';
 
-import {IWords, IWordsData} from '@src/types';
+import {IWords, IWordsData} from '@src/app/types';
 
 import axios from '../index';
 

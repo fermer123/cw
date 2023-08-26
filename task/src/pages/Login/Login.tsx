@@ -3,19 +3,19 @@ import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
+import {IAuthData} from '@src/app/types';
 import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
 import InputForm from '@src/components/component/InputForm/InputForm';
 import NavigateLabel from '@src/components/component/NavigateLabel/NavigateLabel';
 import PostButton from '@src/components/component/PostButton/PostButton';
-import {IAuthData} from '@src/types';
 
-import register from '../../api/register/register';
+import login from '../../components/api/login/login';
 
-import {Auth, ErrorAlert} from './Register.styled';
+import {Auth, ErrorAlert} from './Login.styled';
 
-const Register: FC = () => {
+const Login: FC = () => {
   const [, setUser] = useLocalStorage('user', '');
-  const [errorRegister, setErrorRegister] = useState<string>('');
+  const [errorLogin, setErrorLogin] = useState<string>('');
   const push = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -29,10 +29,10 @@ const Register: FC = () => {
   });
 
   const onSubmit = (values: IAuthData, actions: FormikHelpers<IAuthData>) => {
-    register({
+    login({
       email: values.email,
       password: values.password,
-      setError: setErrorRegister,
+      setError: setErrorLogin,
       push,
       setUser,
     });
@@ -41,8 +41,8 @@ const Register: FC = () => {
   };
 
   const switchAuthForm = useCallback(() => {
-    setErrorRegister('');
-    push('/login');
+    setErrorLogin('');
+    push('/register');
   }, [push]);
 
   return (
@@ -75,13 +75,11 @@ const Register: FC = () => {
                 !!(errors.password && touched.password)
               }
               onSubmit={handleSubmit}
-              label='SIGN IN'
+              label='LOG IN'
             />
-            {!!errorRegister && (
-              <ErrorAlert label={errorRegister} color='error' />
-            )}
+            {!!errorLogin && <ErrorAlert label={errorLogin} color='error' />}
             <NavigateLabel
-              label='already have an account?'
+              label='don`t have an account?'
               switchAuth={switchAuthForm}
             />
           </Auth>
@@ -91,4 +89,4 @@ const Register: FC = () => {
   );
 };
 
-export default Register;
+export default Login;

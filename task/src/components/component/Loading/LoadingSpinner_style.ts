@@ -1,7 +1,7 @@
 import styled, {keyframes} from 'styled-components';
 
 import {Box} from '@mui/system';
-import colors from '@styles/default_variables';
+import colors from '@src/app/styles/default_variables';
 
 const spinner = keyframes`
     0% {

@@ -19,7 +19,7 @@
     "downlevelIteration": true,
     "paths": {
       "@src/*": ["./src/*"],
-      "@styles/*": ["./styles/*"],
+      "@styles/*": ["src/app/styles/*"],
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     },
     "lib": ["esnext", "dom", "dom.iterable"],
@@ -35,7 +35,6 @@
     "webpack.config.ts",
     "jest.config.ts",
     "./config",
-    "./styles",
     "global.d.ts"
   ]
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import {TextField} from '@mui/material';
-import colors from '@styles/default_variables';
+import colors from '@src/app/styles/default_variables';
 
 const InputFormContent = styled(TextField)({
   '& .MuiInputLabel-outlined': {
