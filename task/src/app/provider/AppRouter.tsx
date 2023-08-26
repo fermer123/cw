@@ -1,7 +1,7 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
+import useLocalStorage from '@src/components/component/Hook/useLocalStorage/useLocalStorage';
 import LoadingSpinner from '@src/components/component/Loading/LoadingSpinner';
 import ProtectedRoute from '@src/components/component/ProtectedRoute/ProtectedRoute';
 

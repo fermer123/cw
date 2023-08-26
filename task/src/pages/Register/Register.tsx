@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
 import {IAuthData} from '@src/app/types';
-import useLocalStorage from '@src/components/component/Hook/UseLocalStorage/useLocalStorage';
+import useLocalStorage from '@src/components/component/Hook/useLocalStorage/useLocalStorage';
 import InputForm from '@src/components/component/InputForm/InputForm';
 import NavigateLabel from '@src/components/component/NavigateLabel/NavigateLabel';
 import PostButton from '@src/components/component/PostButton/PostButton';
