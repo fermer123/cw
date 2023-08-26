@@ -21,9 +21,9 @@ const jestConfig: JestConfigWithTsJest = {
   },
   moduleNameMapper: {
     '^@src(.*)$': '<rootDir>/src$1',
+    '^@styles(.*)$': '<rootDir>/styles$1',
     '@mui/styled-engine': '<rootDir>/node_modules/@mui/styled-engine-sc',
     uuid: require.resolve('uuid'),
-    '^@styles(.*)$': '<rootDir>/styles$1',
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['./src/jest.setup.ts'],

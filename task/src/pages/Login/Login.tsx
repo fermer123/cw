@@ -3,13 +3,12 @@ import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import {IAuthData} from '@src/app/types';
-import useLocalStorage from '@src/shared/hooks/useLocalStorage/useLocalStorage';
-import InputForm from '@src/widgets/InputForm/InputForm';
-import NavigateLabel from '@src/widgets/NavigateLabel/NavigateLabel';
-import PostButton from '@src/widgets/PostButton/PostButton';
-
-import login from '../../shared/api/login/login';
+import {IAuthData} from '@app/types';
+import login from '@shared/api/login/login';
+import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
+import InputForm from '@widgets/InputForm/InputForm';
+import NavigateLabel from '@widgets/NavigateLabel/NavigateLabel';
+import PostButton from '@widgets/PostButton/PostButton';
 
 import {Auth, ErrorAlert} from './Login.styled';
 

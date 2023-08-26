@@ -1,6 +1,7 @@
+/* eslint-disable react/no-array-index-key */
 import {FC} from 'react';
 
-import LoadingSpinner from '@src/entities/Loading/LoadingSpinner';
+import LoadingSpinner from '@entities/Loading/LoadingSpinner';
 import {useGetWordsQuery} from '@src/store/wordsApi';
 
 import {HomeContainer} from './Home.styled';

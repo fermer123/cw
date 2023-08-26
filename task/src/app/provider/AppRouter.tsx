@@ -1,13 +1,13 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-import LoadingSpinner from '@src/entities/Loading/LoadingSpinner';
-import useLocalStorage from '@src/shared/hooks/useLocalStorage/useLocalStorage';
-import ProtectedRoute from '@src/widgets/ProtectedRoute/ProtectedRoute';
+import LoadingSpinner from '@entities/Loading/LoadingSpinner';
+import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
+import ProtectedRoute from '@widgets/ProtectedRoute/ProtectedRoute';
 
-const Register = lazy(() => import('@src/pages/Register/Register'));
-const Login = lazy(() => import('@src/pages/Login/Login'));
-const Home = lazy(() => import('@src/pages/Home/Home'));
+const Register = lazy(() => import('@pages/Register/Register'));
+const Login = lazy(() => import('@pages/Login/Login'));
+const Home = lazy(() => import('@pages/Home/Home'));
 
 const AppRouter: FC = () => {
   const [user] = useLocalStorage<string>('user', '');
