@@ -17,6 +17,7 @@ function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
     new webpack.DefinePlugin({
       isDev: JSON.stringify(isDev),
     }),
+    isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
   ];
 }
 
