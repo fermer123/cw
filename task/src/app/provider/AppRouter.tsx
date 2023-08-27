@@ -3,6 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
 import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
+import NotFoundPage from '@src/pages/NotFoundPage/NotFoundPage';
 import ProtectedRoute from '@widgets/ProtectedRoute/ProtectedRoute';
 
 const Register = lazy(() => import('@pages/Register/Register'));
@@ -40,6 +41,7 @@ const AppRouter: FC = () => {
           </Suspense>
         }
       />
+      <Route path='*' element={<NotFoundPage />} />
     </Routes>
   );
 };
