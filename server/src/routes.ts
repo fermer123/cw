@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express';
-import bodyParser, {json} from 'body-parser';
+import bodyParser from 'body-parser';
 const router = express.Router();
 const jsonParser = bodyParser.json();
 import {USERS_JSON_FILE, WORDS_JSON_FILE} from './constants/constants';
@@ -8,7 +8,8 @@ import fs from 'fs';
 import {IAuth, IUserData, IWords} from './types';
 
 let users: IAuth[] = [];
-let words: Array<string> = [];
+let words: IWords[] = [];
+
 if (fs.existsSync(USERS_JSON_FILE)) {
   const userData = fs.readFileSync(USERS_JSON_FILE, 'utf8');
   const parsedUserData: IUserData = JSON.parse(userData);
@@ -17,8 +18,8 @@ if (fs.existsSync(USERS_JSON_FILE)) {
 
 if (fs.existsSync(USERS_JSON_FILE)) {
   const wordsData = fs.readFileSync(WORDS_JSON_FILE, 'utf8');
-  const parsedUserData: IWords = JSON.parse(wordsData);
-  words = parsedUserData.words;
+  const parsedUserData: IWords[] = JSON.parse(wordsData);
+  words = parsedUserData;
 }
 
 router.get('/', (req: Request, res: Response) => {

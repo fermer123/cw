@@ -29,7 +29,13 @@ export interface IUserAuthProps<T> {
   push: NavigateFunction;
 }
 
-export type IWords = string[];
+export interface IWord {
+  id: string;
+  value: string;
+}
+export interface IWords {
+  words: IWord[];
+}
 
 type SetWords = Dispatch<SetStateAction<IWords>>;
 

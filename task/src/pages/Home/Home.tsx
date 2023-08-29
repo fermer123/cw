@@ -8,11 +8,12 @@ import {HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
   const {data: wordsData, isLoading} = useGetWordsQuery('');
+
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
       <ul>
-        {wordsData?.map((e: string, idx: number) => <li key={idx}>{e}</li>)}
+        {wordsData?.words.map(({id, value}) => <li key={id}>{value}</li>)}
       </ul>
     </HomeContainer>
   );

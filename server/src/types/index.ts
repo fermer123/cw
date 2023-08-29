@@ -8,6 +8,10 @@ export interface IUserData {
   users: IAuth[];
 }
 
+export interface IWord {
+  id: string;
+  value: string;
+}
 export interface IWords {
-  words: Array<string>;
+  words: IWord;
 }

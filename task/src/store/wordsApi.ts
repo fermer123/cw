@@ -1,4 +1,4 @@
-import {IWords} from '@app/types';
+import {IWord, IWords} from '@app/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const wordsApi = createApi({
@@ -11,8 +11,8 @@ export const wordsApi = createApi({
       providesTags: ['words'],
     }),
     addWords: build.mutation({
-      query: (body: string) => ({
-        url: '/words',
+      query: (body: IWord) => ({
+        url: `/words${body.id}`,
         method: 'POST',
         body,
       }),
