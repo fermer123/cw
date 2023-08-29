@@ -10,6 +10,14 @@ export const wordsApi = createApi({
       query: () => 'words',
       providesTags: ['words'],
     }),
+    addWords: build.mutation({
+      query: (body: string) => ({
+        url: '/words',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['words'],
+    }),
   }),
 });
 
