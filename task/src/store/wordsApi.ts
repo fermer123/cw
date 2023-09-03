@@ -18,7 +18,15 @@ export const wordsApi = createApi({
       }),
       invalidatesTags: ['words'],
     }),
+    deleteWords: build.mutation({
+      query: (body: IWord) => ({
+        url: `/words${body.id}`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const {useGetWordsQuery} = wordsApi;
+export const {useGetWordsQuery, useAddWordsMutation, useDeleteWordsMutation} =
+  wordsApi;

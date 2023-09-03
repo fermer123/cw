@@ -3,9 +3,11 @@ import type {JestConfigWithTsJest} from 'ts-jest';
 const jestConfig: JestConfigWithTsJest = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  rootDir: '../../',
+  modulePaths: ['<rootDir>/src'],
   testMatch: ['<rootDir>/src/**/*.test.ts', '<rootDir>/src/**/*.test.tsx'],
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!**/node_modules/**'],
   coverageDirectory: '<rootDir>/coverage/',
   testPathIgnorePatterns: ['<rootDir>/src/index.tsx'],
   transform: {
@@ -14,7 +16,7 @@ const jestConfig: JestConfigWithTsJest = {
     '^.+\\.tsx?$': [
       'ts-jest',
       {
-        tsconfig: 'tsconfig.json',
+        tsconfig: '<rootDir>/tsconfig.json',
         isolatedModules: true, // 2 fix dinamic import
       },
     ],
@@ -26,7 +28,7 @@ const jestConfig: JestConfigWithTsJest = {
     uuid: require.resolve('uuid'),
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  setupFilesAfterEnv: ['./src/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/config/jest/jest.setup.ts'],
 };
 
 export default jestConfig;

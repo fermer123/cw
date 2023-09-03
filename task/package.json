@@ -9,7 +9,7 @@
     "build:dev": "webpack --env mode=development --progress",
     "analyze": "mkdir dist 2>nul && webpack --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json ",
     "lint": "eslint src/**/*.{ts,tsx} --quiet --fix",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --config ./config/jest/jest.config.ts --runInBand --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",
