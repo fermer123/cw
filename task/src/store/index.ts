@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
-import {wordsApi} from './wordsApi';
+import {authApi} from './api/authApi';
+import {wordsApi} from './api/wordsApi';
 
 const rootReducer = combineReducers({
   [wordsApi.reducerPath]: wordsApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
 });
 
 export const setupStore = () => {

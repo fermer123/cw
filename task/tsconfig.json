@@ -36,5 +36,5 @@
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "build"],
-  "include": ["./src", "webpack.config.ts", "./config", "global.d.ts"]
+  "include": ["./src", "./config", "global.d.ts", "webpack.config.ts"]
 }

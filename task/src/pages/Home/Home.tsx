@@ -2,7 +2,7 @@
 import {FC} from 'react';
 
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
-import {useGetWordsQuery} from '@src/store/wordsApi';
+import {useGetWordsQuery} from '@src/store/api/wordsApi';
 
 import {HomeContainer} from './Home.styled';
 
