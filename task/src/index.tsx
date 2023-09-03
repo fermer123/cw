@@ -3,8 +3,8 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 
 import GlobalStyle from '@app/styles/global';
-import Layout from '@pages/Layout';
 
+import AppRouter from './app/provider/AppRouter';
 import {setupStore} from './store';
 
 const store = setupStore();
@@ -13,7 +13,7 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <GlobalStyle />
-      <Layout />
+      <AppRouter />
     </BrowserRouter>
   </Provider>,
 );
