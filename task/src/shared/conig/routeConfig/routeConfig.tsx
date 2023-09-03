@@ -1,27 +1,28 @@
+import {lazy} from 'react';
 import {RouteProps} from 'react-router-dom';
 
-import Home from '@src/pages/Home/Home';
-import Login from '@src/pages/Login/Login';
-import NotFoundPage from '@src/pages/NotFoundPage/NotFoundPage';
-import Register from '@src/pages/Register/Register';
+const Register = lazy(() => import('@pages/Register/Register'));
+const Login = lazy(() => import('@pages/Login/Login'));
+const Home = lazy(() => import('@pages/Home/Home'));
+const NotFoundPage = lazy(() => import('@pages/NotFoundPage/NotFoundPage'));
 
 export enum AppRoutes {
-  MAIN = 'main',
+  HOME = 'home',
   LOGIN = 'login',
   REGISTER = 'register',
   NOT_FOUND = 'not_found',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-  [AppRoutes.MAIN]: '/',
+  [AppRoutes.HOME]: '/',
   [AppRoutes.LOGIN]: '/login',
   [AppRoutes.REGISTER]: '/register',
   [AppRoutes.NOT_FOUND]: '*',
 };
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
-  [AppRoutes.MAIN]: {
-    path: RoutePath.main,
+  [AppRoutes.HOME]: {
+    path: RoutePath.home,
     element: <Home />,
   },
   [AppRoutes.LOGIN]: {

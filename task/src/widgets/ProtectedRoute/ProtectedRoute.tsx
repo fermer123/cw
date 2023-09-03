@@ -1,9 +1,9 @@
-import {FC, ReactElement} from 'react';
+import {FC, ReactNode} from 'react';
 import {Navigate} from 'react-router-dom';
 
 export interface IProtectedRouteProps {
   user: string;
-  children: ReactElement | null;
+  children: ReactNode;
 }
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({user, children}) => {

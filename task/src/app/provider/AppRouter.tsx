@@ -1,48 +1,31 @@
-import {FC, lazy, Suspense} from 'react';
+import {FC, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
+import {routeConfig} from '@shared/conig/routeConfig/routeConfig';
 import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
-import NotFoundPage from '@src/pages/NotFoundPage/NotFoundPage';
 import ProtectedRoute from '@widgets/ProtectedRoute/ProtectedRoute';
-
-const Register = lazy(() => import('@pages/Register/Register'));
-const Login = lazy(() => import('@pages/Login/Login'));
-const Home = lazy(() => import('@pages/Home/Home'));
 
 const AppRouter: FC = () => {
   const [user] = useLocalStorage<string>('user', '');
 
   return (
-    <Routes>
-      <Route
-        path='/register'
-        element={
-          <Suspense fallback={<LoadingSpinner />}>
-            <Register />
-          </Suspense>
-        }
-      />
-      <Route
-        path='/login'
-        element={
-          <Suspense fallback={<LoadingSpinner />}>
-            <Login />
-          </Suspense>
-        }
-      />
-      <Route
-        path='/'
-        element={
-          <Suspense fallback={<LoadingSpinner />}>
-            <ProtectedRoute user={user}>
-              <Home />
-            </ProtectedRoute>
-          </Suspense>
-        }
-      />
-      <Route path='*' element={<NotFoundPage />} />
-    </Routes>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        {Object.values(routeConfig).map(({element, path}) => {
+          if (path === '/login' || path === '/register') {
+            return <Route key={path} path={path} element={element} />;
+          }
+          return (
+            <Route
+              key={path}
+              path={path}
+              element={<ProtectedRoute user={user}>{element}</ProtectedRoute>}
+            />
+          );
+        })}
+      </Routes>
+    </Suspense>
   );
 };
 
