@@ -6,15 +6,14 @@ import {NavigateFunction} from 'react-router-dom';
 const axiosError = (error: unknown): error is AxiosError => {
   return error instanceof AxiosError;
 };
-
-type TEmail = string;
-type TPassword = string;
-
 type SetError = (error: string) => void;
-
 type SetUser<T> = (
   value: (T extends string ? string : unknown) | ((val: T) => T),
 ) => void;
+
+// authApi
+export type TEmail = string;
+export type TPassword = string;
 
 export interface IAuthData {
   email: TEmail;
@@ -28,7 +27,7 @@ export interface IUserAuthProps<T> {
   setUser: SetUser<T>;
   push: NavigateFunction;
 }
-
+// wordsApi
 export interface IWord {
   id: string;
   value: string;

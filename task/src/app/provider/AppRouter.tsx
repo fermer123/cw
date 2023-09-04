@@ -13,7 +13,7 @@ const AppRouter: FC = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
         {Object.values(routeConfig).map(({element, path}) => {
-          if (path === '/login' || path === '/register') {
+          if (path === '/login' || path === '/register' || path === '*') {
             return <Route key={path} path={path} element={element} />;
           }
           return (
