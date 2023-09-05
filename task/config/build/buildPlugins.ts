@@ -16,6 +16,7 @@ function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
     }),
     new webpack.DefinePlugin({
       isDev: JSON.stringify(isDev),
+      baseURL: JSON.stringify('http://localhost:3000/'),
     }),
     isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
   ];

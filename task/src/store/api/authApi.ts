@@ -1,10 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
 import {IAuthData} from '@src/app/types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000/'}),
+  baseQuery: fetchBaseQuery({baseUrl: baseURL as string}),
   tagTypes: ['auth'],
   endpoints: (build) => ({
     login: build.mutation({

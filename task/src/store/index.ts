@@ -15,7 +15,7 @@ export const setupStore = () => {
     reducer: rootReducer,
     devTools: true, // isDev
     middleware: (getDefaultMiddleWare) =>
-      getDefaultMiddleWare().concat(wordsApi.middleware),
+      getDefaultMiddleWare().concat(wordsApi.middleware, authApi.middleware),
   });
   return store;
 };

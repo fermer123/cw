@@ -1,4 +1,5 @@
 declare const isDev: boolean;
+declare const baseURL: string;
 
 // declare module '*.ttf';
 // declare module '*.png';
