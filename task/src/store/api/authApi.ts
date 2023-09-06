@@ -3,7 +3,7 @@ import {IAuthData} from '@src/app/types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({baseUrl: baseURL as string}),
+  baseQuery: fetchBaseQuery({baseUrl: baseURL}),
   tagTypes: ['auth'],
   endpoints: (build) => ({
     login: build.mutation({

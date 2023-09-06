@@ -6,9 +6,11 @@ import {BuildOption} from './types/config';
 
 function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
   return [
-    new HtmlWebpackPlugin({
-      template: paths.template,
-    }),
+    isDev
+      ? new HtmlWebpackPlugin({
+          template: paths.template,
+        })
+      : undefined,
     new BundleAnalyzerPlugin({
       openAnalyzer: true,
       analyzerMode: 'server',
