@@ -9,18 +9,18 @@ function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
     new HtmlWebpackPlugin({
       template: paths.template,
     }),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: true,
-      analyzerMode: 'server',
-      reportFilename: paths.analyzer,
+    new webpack.DefinePlugin({
+      isDev: JSON.stringify(isDev),
+      baseURL: JSON.stringify('http://localhost:3000/'),
     }),
+    isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
     isDev
-      ? new webpack.DefinePlugin({
-          isDev: JSON.stringify(isDev),
-          baseURL: JSON.stringify('http://localhost:3000/'),
+      ? new BundleAnalyzerPlugin({
+          openAnalyzer: true,
+          analyzerMode: 'server',
+          reportFilename: paths.analyzer,
         })
       : undefined,
-    isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
   ];
 }
 
