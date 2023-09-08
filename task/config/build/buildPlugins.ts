@@ -6,20 +6,20 @@ import {BuildOption} from './types/config';
 
 function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
   return [
-    isDev
-      ? new HtmlWebpackPlugin({
-          template: paths.template,
-        })
-      : undefined,
+    new HtmlWebpackPlugin({
+      template: paths.template,
+    }),
     new BundleAnalyzerPlugin({
       openAnalyzer: true,
       analyzerMode: 'server',
       reportFilename: paths.analyzer,
     }),
-    new webpack.DefinePlugin({
-      isDev: JSON.stringify(isDev),
-      baseURL: JSON.stringify('http://localhost:3000/'),
-    }),
+    isDev
+      ? new webpack.DefinePlugin({
+          isDev: JSON.stringify(isDev),
+          baseURL: JSON.stringify('http://localhost:3000/'),
+        })
+      : undefined,
     isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
   ];
 }
