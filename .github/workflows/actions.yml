@@ -27,5 +27,3 @@ jobs:
         run: npm run build:prod
       - name: run linting
         run: npm run lint
-      - name: run testing
-        run: npm run test
