@@ -19,7 +19,7 @@ export const wordsApi = createApi({
       invalidatesTags: ['words'],
     }),
     deleteWords: build.mutation({
-      query: (body: IWord) => ({
+      query: (body: Partial<IWord>) => ({
         url: `/words${body.id}`,
         method: 'DELETE',
         body,

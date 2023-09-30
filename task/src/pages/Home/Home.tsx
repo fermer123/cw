@@ -2,9 +2,8 @@
 import {FC} from 'react';
 
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
+import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 import {useGetWordsQuery} from '@src/store/api/wordsApi';
-
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 import {HomeContainer} from './Home.styled';
 
