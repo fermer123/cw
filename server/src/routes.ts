@@ -5,10 +5,10 @@ const jsonParser = bodyParser.json();
 import {USERS_JSON_FILE, WORDS_JSON_FILE} from './constants/constants';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
-import {IAuth, IUserData, IWords} from './types';
+import {IAuth, IUserData, IWord, IWords} from './types';
 
 let users: IAuth[] = [];
-let words: IWords[] = [];
+let words: IWord[] = [];
 
 if (fs.existsSync(USERS_JSON_FILE)) {
   const userData = fs.readFileSync(USERS_JSON_FILE, 'utf8');
@@ -18,8 +18,8 @@ if (fs.existsSync(USERS_JSON_FILE)) {
 
 if (fs.existsSync(USERS_JSON_FILE)) {
   const wordsData = fs.readFileSync(WORDS_JSON_FILE, 'utf8');
-  const parsedUserData: IWords[] = JSON.parse(wordsData);
-  words = parsedUserData;
+  const parsedUserData: IWords = JSON.parse(wordsData);
+  words = parsedUserData.words;
 }
 
 router.get('/', (req: Request, res: Response) => {
@@ -27,6 +27,30 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.get('/words', (req: Request, res: Response) => {
+  res.json(words);
+});
+
+router.post('/words/:id', (req: Request, res: Response) => {
+  const newWord = req.body;
+  words.push(newWord);
+  res.json(words);
+});
+
+router.delete('/words/:id', (req: Request, res: Response) => {
+  const id = req.params.id;
+  words = words.filter((word) => word.id !== id);
+  res.json(words);
+});
+
+router.patch('/words/:id', (req: Request, res: Response) => {
+  const id = req.params.id;
+  const updatedWords = req.body;
+  words = words.map((word) => {
+    if (word.id === id) {
+      return {...word, ...updatedWords};
+    }
+    return word;
+  });
   res.json(words);
 });
 

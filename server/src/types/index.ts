@@ -13,5 +13,5 @@ export interface IWord {
   value: string;
 }
 export interface IWords {
-  words: IWord;
+  words: IWord[];
 }

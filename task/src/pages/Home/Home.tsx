@@ -4,17 +4,17 @@ import {FC} from 'react';
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
 import {useGetWordsQuery} from '@src/store/api/wordsApi';
 
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+
 import {HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
-  const {data: wordsData, isLoading} = useGetWordsQuery('');
-  console.log('check actions');
+  const {data: wordsData, isLoading, isError} = useGetWordsQuery('');
+  if (isError) return <NotFoundPage />;
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
-      <ul>
-        {wordsData?.words.map(({id, value}) => <li key={id}>{value}</li>)}
-      </ul>
+      <ul>{wordsData?.map(({id, value}) => <li key={id}>{value}</li>)}</ul>
     </HomeContainer>
   );
 };
