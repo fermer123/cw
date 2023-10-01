@@ -15,7 +15,7 @@ const Home: FC = () => {
 
   const handleAddNewWord = async (): Promise<void> => {
     if (newWord) {
-      await addWords({id: uuidv4(), value: newWord}).unwrap();
+      await addWords({id: uuidv4(), value: newWord});
       setNewWord('');
     }
   };
@@ -27,7 +27,7 @@ const Home: FC = () => {
       {isLoading && <LoadingSpinner />}
       <ul>{wordsData?.map(({id, value}) => <li key={id}>{value}</li>)}</ul>
       <input value={newWord} onChange={(e) => setNewWord(e.target.value)} />
-      <button type='button' onClick={() => handleAddNewWord()}>
+      <button type='button' onClick={handleAddNewWord}>
         add
       </button>
     </HomeContainer>
