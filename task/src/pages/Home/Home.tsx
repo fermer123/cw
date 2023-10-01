@@ -8,7 +8,7 @@ import {useGetWordsQuery} from '@src/store/api/wordsApi';
 import {HomeContainer} from './Home.styled';
 
 const Home: FC = () => {
-  const {data: wordsData, isLoading, isError} = useGetWordsQuery('');
+  const {data: wordsData, isLoading, isError} = useGetWordsQuery('2');
   if (isError) return <NotFoundPage />;
   return (
     <HomeContainer>

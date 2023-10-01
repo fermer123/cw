@@ -26,8 +26,12 @@ router.get('/', (req: Request, res: Response) => {
   res.json(`users:  ${JSON.stringify(users)} `);
 });
 
-router.get('/words', (req: Request, res: Response) => {
-  res.json(words);
+router.get('/words', jsonParser, (req: Request, res: Response) => {
+  const limit = req.query.limit
+    ? parseInt(req.query.limit as string)
+    : undefined;
+  const result = limit ? words.slice(0, limit) : words;
+  res.json(result);
 });
 
 router.post('/words/:id', (req: Request, res: Response) => {

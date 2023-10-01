@@ -7,7 +7,7 @@ export const wordsApi = createApi({
   tagTypes: ['words'],
   endpoints: (build) => ({
     getWords: build.query<IWord[], string>({
-      query: () => 'words',
+      query: (limit = '') => `words?limit=${limit}`,
       providesTags: ['words'],
     }),
     addWords: build.mutation({
