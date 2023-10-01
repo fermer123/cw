@@ -16,7 +16,7 @@ if (fs.existsSync(USERS_JSON_FILE)) {
   users = parsedUserData.users;
 }
 
-if (fs.existsSync(USERS_JSON_FILE)) {
+if (fs.existsSync(WORDS_JSON_FILE)) {
   const wordsData = fs.readFileSync(WORDS_JSON_FILE, 'utf8');
   const parsedUserData: IWords = JSON.parse(wordsData);
   words = parsedUserData.words;
@@ -26,7 +26,7 @@ router.get('/', (req: Request, res: Response) => {
   res.json(`users:  ${JSON.stringify(users)} `);
 });
 
-router.get('/words', jsonParser, (req: Request, res: Response) => {
+router.get('/words', (req: Request, res: Response) => {
   const limit = req.query.limit
     ? parseInt(req.query.limit as string)
     : undefined;
@@ -34,9 +34,10 @@ router.get('/words', jsonParser, (req: Request, res: Response) => {
   res.json(result);
 });
 
-router.post('/words/:id', (req: Request, res: Response) => {
+router.post('/words/:id', jsonParser, (req: Request, res: Response) => {
   const newWord = req.body;
   words.push(newWord);
+  fs.writeFileSync(WORDS_JSON_FILE, JSON.stringify({words: [...words]}));
   res.json(words);
 });
 

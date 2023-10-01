@@ -12,7 +12,7 @@ export const wordsApi = createApi({
     }),
     addWords: build.mutation({
       query: (body: IWord) => ({
-        url: `/words${body.id}`,
+        url: `/words/${body.id}`,
         method: 'POST',
         body,
       }),
@@ -36,5 +36,13 @@ export const wordsApi = createApi({
   }),
 });
 
-export const {useGetWordsQuery, useAddWordsMutation, useDeleteWordsMutation} =
-  wordsApi;
+export const {
+  // words
+
+  useGetWordsQuery,
+  useAddWordsMutation,
+  useDeleteWordsMutation,
+  useChangeWordMutation,
+
+  //
+} = wordsApi;
