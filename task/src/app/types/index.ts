@@ -10,11 +10,20 @@ type SetError = (error: string) => void;
 type SetUser<T> = (
   value: (T extends string ? string : unknown) | ((val: T) => T),
 ) => void;
+type SetWords = Dispatch<SetStateAction<IWords>>;
 
-// authApi
 export type TEmail = string;
 export type TPassword = string;
 
+// wordsApi
+export interface IWord {
+  id: string;
+  value: string;
+}
+export interface IWords {
+  words: IWord[];
+}
+// authApi
 export interface IAuthData {
   email: TEmail;
   password: TPassword;
@@ -27,18 +36,20 @@ export interface IUserAuthProps<T> {
   setUser: SetUser<T>;
   push: NavigateFunction;
 }
-// wordsApi
-export interface IWord {
-  id: string;
-  value: string;
-}
-export interface IWords {
-  words: IWord[];
-}
-
-type SetWords = Dispatch<SetStateAction<IWords>>;
 
 export interface IWordsData {
   setError: SetError;
   setWords: SetWords;
 }
+export const isStringArray = (arr: unknown): arr is string[] => {
+  if (Array.isArray(arr) && arr.every((e) => typeof e === 'string')) {
+    return true;
+  }
+  return false;
+};
+export const isNumberArray = (arr: unknown): arr is number[] => {
+  if (Array.isArray(arr) && arr.every((e) => typeof e === 'number')) {
+    return true;
+  }
+  return false;
+};

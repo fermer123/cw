@@ -1,9 +1,9 @@
 import {ChangeEvent, useCallback, useState} from 'react';
 
-type IchangeHandler = (e: ChangeEvent<HTMLInputElement>) => void;
+type IChangeHandler = (e: ChangeEvent<HTMLInputElement>) => void;
 const useInput = (initialValie = '') => {
   const [value, setValue] = useState<string>(initialValie);
-  const changeHandler: IchangeHandler = useCallback(
+  const onChange: IChangeHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value);
     },
@@ -12,7 +12,7 @@ const useInput = (initialValie = '') => {
   return {
     setValue,
     value,
-    onChange: changeHandler,
+    onChange,
   };
 };
 export default useInput;

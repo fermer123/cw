@@ -20,14 +20,14 @@ export const wordsApi = createApi({
     }),
     deleteWords: build.mutation({
       query: (body: Partial<IWord>) => ({
-        url: `/words${body.id}`,
+        url: `/words/${body.id}`,
         method: 'DELETE',
         body,
       }),
     }),
     changeWord: build.mutation({
       query: (body: IWord) => ({
-        url: `/words${body.id}`,
+        url: `/words/${body.id}`,
         method: 'PATCH',
         body,
       }),
