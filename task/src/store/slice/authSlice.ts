@@ -1,17 +1,16 @@
 /* eslint-disable no-param-reassign */
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TEmail} from '@src/app/types';
 
 const USER = 'user';
 const ACCESS_KEY = 'access';
 
 interface IAuthState {
-  email: TEmail;
+  email: string;
   isAuth: boolean;
 }
 
 interface IAuthPayload {
-  email: TEmail;
+  email: string;
   access: string;
 }
 

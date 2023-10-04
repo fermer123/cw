@@ -1,9 +1,19 @@
 import {AxiosError, isAxiosError} from 'axios';
+import {NavigateFunction} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
 
-import {IUserAuthProps} from '@src/app/types';
-
 import axios from '../index';
+
+type SetUser<T> = (
+  value: (T extends string ? string : unknown) | ((val: T) => T),
+) => void;
+interface IUserAuthProps<T> {
+  email: string;
+  password: string;
+  setError: (error: string) => void;
+  setUser: SetUser<T>;
+  push: NavigateFunction;
+}
 
 const Register = async <T>({
   email,
