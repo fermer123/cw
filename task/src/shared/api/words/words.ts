@@ -1,14 +1,10 @@
-import {Dispatch, SetStateAction} from 'react';
 import {AxiosError, AxiosResponse, isAxiosError} from 'axios';
 
-import {IWords} from '@src/app/types';
+import {IWords} from '@app/types';
 
 import axios from '../index';
+import {IWordsData} from '../types';
 
-interface IWordsData {
-  setError: (error: string) => void;
-  setWords: Dispatch<SetStateAction<IWords>>;
-}
 const GetWords = async ({setError, setWords}: IWordsData) => {
   try {
     const resp: AxiosResponse<IWords> = await axios.get('/words');

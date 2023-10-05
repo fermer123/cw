@@ -4,6 +4,11 @@ import {AxiosError} from 'axios';
 const axiosError = (error: unknown): error is AxiosError => {
   return error instanceof AxiosError;
 };
+export interface IAuthData {
+  email: string;
+  password: string;
+  id: string;
+}
 
 // wordsApi
 export interface IWord {

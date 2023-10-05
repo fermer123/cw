@@ -3,7 +3,6 @@ export interface IAuth {
   password: string;
   id: string;
 }
-
 export interface IUserData {
   users: IAuth[];
 }

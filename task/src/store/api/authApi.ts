@@ -1,5 +1,5 @@
+import {IAuthData} from '@app/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
-import {IAuthData} from '@src/app/types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
