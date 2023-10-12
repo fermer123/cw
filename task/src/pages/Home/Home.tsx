@@ -19,7 +19,7 @@ const Home: FC = () => {
       setNewWord('');
     }
   };
-
+  //
   if (isError) return <NotFoundPage />;
 
   return (
