@@ -40,6 +40,7 @@ export const {
   // words
 
   useGetWordsQuery,
+
   useAddWordsMutation,
   useDeleteWordsMutation,
   useChangeWordMutation,

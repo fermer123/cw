@@ -48,7 +48,7 @@ const Register: FC = () => {
     <Formik
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-      initialValues={{password: '', email: ''}}>
+      initialValues={{password: '', email: '', id: ''}}>
       {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
         <Form>
           <Auth>

@@ -1,8 +1,8 @@
 import {FC, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
+import {routeConfig} from '@app/routeConfig/routeConfig';
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
-import {routeConfig} from '@shared/conig/routeConfig/routeConfig';
 import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
 import ProtectedRoute from '@widgets/ProtectedRoute/ProtectedRoute';
 
