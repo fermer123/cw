@@ -1,48 +1,60 @@
 /* eslint-disable no-param-reassign */
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+import {authApi} from '../api/authApi';
+
 const USER = 'user';
 const ACCESS_KEY = 'access';
 
 interface IAuthState {
-  email: string;
-  isAuth: boolean;
+  name: string;
+  token: string;
 }
 
 interface IAuthPayload {
-  email: string;
-  access: string;
+  name: string;
+  token: string;
 }
 
 const initialState: IAuthState = {
-  email: localStorage.getItem(USER) ?? '',
-  isAuth: Boolean(localStorage.getItem(ACCESS_KEY)) ?? false,
+  name: localStorage.getItem(USER) ?? '',
+  token: localStorage.getItem(ACCESS_KEY) ?? '',
 };
 
-const AuthSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     login(state, action: PayloadAction<IAuthPayload>) {
-      state.email = action.payload.email;
-      state.isAuth = Boolean(action.payload.access);
-      localStorage.setItem(USER, JSON.stringify(action.payload.email));
-      localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.access));
+      const {name, token} = action.payload;
+      state.name = name;
+      state.token = token;
+      localStorage.setItem(USER, JSON.stringify(action.payload.name));
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.token));
+    },
+    register(state, action: PayloadAction<IAuthPayload>) {
+      const {name, token} = action.payload;
+      state.name = name;
+      state.token = token;
+      localStorage.setItem(USER, JSON.stringify(name));
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(token));
     },
     logout(state) {
-      state.email = '';
-      state.isAuth = false;
+      state.name = '';
+      state.token = '';
       localStorage.removeItem(USER);
       localStorage.removeItem(ACCESS_KEY);
     },
-    register(state, action: PayloadAction<IAuthPayload>) {
-      state.email = action.payload.email;
-      state.isAuth = Boolean(action.payload.access);
-      localStorage.setItem(USER, JSON.stringify(action.payload.email));
-      localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.access));
-    },
   },
-  // extraReducers: (builder) => builder.addCase(login,() => {}),
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      authApi.endpoints.login.matchFulfilled,
+      (state, {payload}: PayloadAction<IAuthPayload>) => {
+        state.token = payload.token;
+        state.name = payload.name;
+      },
+    );
+  },
 });
 
-export default AuthSlice.reducer;
+export default authSlice.reducer;
