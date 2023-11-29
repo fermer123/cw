@@ -1,11 +1,11 @@
-import {FC, useCallback, useState} from 'react';
+import {FC, useCallback} from 'react';
 import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
 import * as Yup from 'yup';
 
 import {IAuthData} from '@app/types';
-import register from '@shared/api/register/register';
-import useLocalStorage from '@shared/hooks/useLocalStorage/useLocalStorage';
+import {useRegisterMutation} from '@src/store/api/authApi';
 import InputForm from '@widgets/InputForm/InputForm';
 import NavigateLabel from '@widgets/NavigateLabel/NavigateLabel';
 import PostButton from '@widgets/PostButton/PostButton';
@@ -13,8 +13,7 @@ import PostButton from '@widgets/PostButton/PostButton';
 import {Auth, ErrorAlert} from './Register.styled';
 
 const Register: FC = () => {
-  const [, setUser] = useLocalStorage('user', '');
-  const [errorRegister, setErrorRegister] = useState<string>('');
+  const [register, {isError}] = useRegisterMutation();
   const push = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -27,20 +26,21 @@ const Register: FC = () => {
       .required('Поле не должо быть пустым'),
   });
 
-  const onSubmit = (values: IAuthData, actions: FormikHelpers<IAuthData>) => {
-    register({
-      email: values.email,
-      password: values.password,
-      setError: setErrorRegister,
-      push,
-      setUser,
-    });
-    actions.resetForm();
-    actions.setSubmitting(false);
-  };
+  const onSubmit = useCallback(
+    async (values: IAuthData, actions: FormikHelpers<IAuthData>) => {
+      await register({
+        email: values.email,
+        password: values.password,
+        id: uuidv4(),
+      });
+      push('/');
+      actions.resetForm();
+      actions.setSubmitting(false);
+    },
+    [push, register],
+  );
 
   const switchAuthForm = useCallback(() => {
-    setErrorRegister('');
     push('/login');
   }, [push]);
 
@@ -76,9 +76,7 @@ const Register: FC = () => {
               onSubmit={handleSubmit}
               label='SIGN IN'
             />
-            {!!errorRegister && (
-              <ErrorAlert label={errorRegister} color='error' />
-            )}
+            {!!isError && <ErrorAlert label={isError} color='error' />}
             <NavigateLabel
               label='already have an account?'
               switchAuth={switchAuthForm}

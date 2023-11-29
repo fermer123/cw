@@ -37,13 +37,10 @@ export const wordsApi = createApi({
 });
 
 export const {
-  // words
-
+  // query
   useGetWordsQuery,
-
+  // mutation
   useAddWordsMutation,
   useDeleteWordsMutation,
   useChangeWordMutation,
-
-  //
 } = wordsApi;

@@ -2,7 +2,7 @@ import {isNumberArray, isStringArray} from '@app/types';
 
 type TSortDirrection = 'asc' | 'desc';
 
-const sort = <T>(arr: T[], direction: TSortDirrection = 'asc'): T[] => {
+export const sort = <T>(arr: T[], direction: TSortDirrection = 'asc'): T[] => {
   const sortedArr = [...arr];
   if (isNumberArray(arr)) {
     if (direction === 'asc') {
@@ -20,4 +20,3 @@ const sort = <T>(arr: T[], direction: TSortDirrection = 'asc'): T[] => {
   }
   return sortedArr;
 };
-export default sort;

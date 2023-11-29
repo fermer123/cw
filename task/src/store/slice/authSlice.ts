@@ -42,6 +42,7 @@ const AuthSlice = createSlice({
       localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.access));
     },
   },
+  // extraReducers: (builder) => builder.addCase(login,() => {}),
 });
 
 export default AuthSlice.reducer;

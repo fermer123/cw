@@ -1,9 +1,3 @@
-import {AxiosError} from 'axios';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const axiosError = (error: unknown): error is AxiosError => {
-  return error instanceof AxiosError;
-};
 export interface IAuthData {
   email: string;
   password: string;

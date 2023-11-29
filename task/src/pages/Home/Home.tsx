@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import {FC, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 
 import LoadingSpinner from '@entities/Loading/LoadingSpinner';
@@ -13,12 +13,12 @@ const Home: FC = () => {
   const [addWords] = useAddWordsMutation();
   const [newWord, setNewWord] = useState('');
 
-  const handleAddNewWord = async (): Promise<void> => {
+  const handleAddNewWord = useCallback(async (): Promise<void> => {
     if (newWord) {
       await addWords({id: uuidv4(), value: newWord});
       setNewWord('');
     }
-  };
+  }, [addWords, newWord]);
 
   if (isError) return <NotFoundPage />;
 
