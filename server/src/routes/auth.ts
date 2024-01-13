@@ -23,14 +23,9 @@ router.get('/', (req: Request, res: Response) => {
 router.post('/login', jsonParser, async (req: Request, res: Response) => {
   const {email, password, id}: IAuth = await req.body;
   try {
-    const user = users.find(
-      (e) => e.email === email && e.password === password,
-    );
+    const user = users.some((e) => e.email === email);
     if (user) {
-      const token = jwt.sign(
-        {email: user.email, password: user.password},
-        `${id}`,
-      );
+      const token = jwt.sign({email, password}, `${id}`);
       return res
         .status(200)
         .json({token: token, name: getUsernameFromEmail(email)});
@@ -49,19 +44,14 @@ router.post('/login', jsonParser, async (req: Request, res: Response) => {
 router.post('/register', jsonParser, async (req: Request, res: Response) => {
   const {email, password, id}: IAuth = await req.body;
   try {
-    const user = users.find(
-      (e) => e.email === email && e.password === password,
-    );
+    const user = users.some((user) => user.email === email);
     if (user) {
       return res.status(400).json('Email уже используется');
     }
 
     users.push({email, password, id});
     fs.writeFileSync(USERS_JSON_FILE, JSON.stringify({users: [...users]}));
-    const token = jwt.sign(
-      {email: user.email, password: user.password},
-      `${id}`,
-    );
+    const token = jwt.sign({email, password}, `${id}`);
     return res
       .status(200)
       .json({token: token, name: getUsernameFromEmail(email)});

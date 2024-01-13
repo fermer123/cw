@@ -14,6 +14,6 @@ export const Auth = styled(Box)`
   padding: 0 10px;
 `;
 export const ErrorAlert = styled(Chip)`
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  max-width: fit-content;
 `;

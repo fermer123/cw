@@ -5,7 +5,9 @@ import {v4 as uuidv4} from 'uuid';
 import * as Yup from 'yup';
 
 import {IAuthData} from '@app/types';
+import useAppDispatch from '@src/shared/hooks/redux/useAppDispatch';
 import {useLoginMutation} from '@src/store/api/authApi';
+import {IAuthState, setCredentials} from '@src/store/slice/authSlice';
 import InputForm from '@widgets/InputForm/InputForm';
 import NavigateLabel from '@widgets/NavigateLabel/NavigateLabel';
 import PostButton from '@widgets/PostButton/PostButton';
@@ -15,6 +17,8 @@ import {Auth, ErrorAlert} from './Login.styled';
 const Login: FC = () => {
   const push = useNavigate();
   const [login, {isError}] = useLoginMutation();
+
+  const dispatch = useAppDispatch();
 
   const validationSchema = Yup.object().shape({
     password: Yup.string()
@@ -27,17 +31,25 @@ const Login: FC = () => {
   });
 
   const onSubmit = useCallback(
-    async (values: IAuthData, actions: FormikHelpers<IAuthData>) => {
-      await login({
-        email: values.email,
-        password: values.password,
-        id: uuidv4(),
-      });
-      actions.resetForm();
-      actions.setSubmitting(false);
-      push('/');
+    async (
+      values: IAuthData,
+      actions: FormikHelpers<IAuthData>,
+    ): Promise<void> => {
+      try {
+        const user: IAuthState = (await login({
+          email: values.email,
+          password: values.password,
+          id: uuidv4(),
+        }).unwrap()) as IAuthState;
+        dispatch(setCredentials({name: user.name, token: user.token}));
+        actions.resetForm();
+        actions.setSubmitting(false);
+        push('/');
+      } catch (error: unknown) {
+        console.log(error);
+      }
     },
-    [login, push],
+    [login, push, dispatch],
   );
 
   const switchAuthForm = useCallback(() => {
