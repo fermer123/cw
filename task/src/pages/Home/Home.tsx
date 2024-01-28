@@ -13,7 +13,7 @@ const Home: FC = () => {
   const [addWords] = useAddWordsMutation();
   const [newWord, setNewWord] = useState('');
 
-  const handleAddNewWord = useCallback(async (): Promise<void> => {
+  const handleAddNewWord = useCallback(async () => {
     if (newWord) {
       await addWords({id: uuidv4(), value: newWord});
       setNewWord('');
@@ -27,7 +27,11 @@ const Home: FC = () => {
       {isLoading && <LoadingSpinner />}
       <ul>{wordsData?.map(({id, value}) => <li key={id}>{value}</li>)}</ul>
       <input value={newWord} onChange={(e) => setNewWord(e.target.value)} />
-      <button type='button' onClick={handleAddNewWord}>
+      <button
+        type='button'
+        onClick={() => {
+          handleAddNewWord();
+        }}>
         add
       </button>
     </HomeContainer>
