@@ -44,6 +44,7 @@ const Login: FC = () => {
         dispatch(setCredentials({name: user.name, token: user.token}));
         actions.resetForm();
         actions.setSubmitting(false);
+
         push('/');
       } catch (error: unknown) {
         console.log(error);
