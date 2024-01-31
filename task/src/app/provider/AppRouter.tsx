@@ -2,8 +2,8 @@ import {FC, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
 import {routeConfig} from '@app/routeConfig/routeConfig';
-import LoadingSpinner from '@entities/Loading/LoadingSpinner';
 import {useAuth} from '@shared/hooks/redux/useAuth';
+import LoadingSpinner from '@widgets/Loading/LoadingSpinner';
 import ProtectedRoute from '@widgets/ProtectedRoute/ProtectedRoute';
 
 const AppRouter: FC = () => {

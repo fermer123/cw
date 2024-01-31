@@ -2,9 +2,9 @@
 import {FC, useCallback, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 
-import LoadingSpinner from '@entities/Loading/LoadingSpinner';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 import {useAddWordsMutation, useGetWordsQuery} from '@src/store/api/wordsApi';
+import LoadingSpinner from '@widgets/Loading/LoadingSpinner';
 
 import {HomeContainer} from './Home.styled';
 
