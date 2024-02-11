@@ -5,12 +5,12 @@ import {v4 as uuidv4} from 'uuid';
 import * as Yup from 'yup';
 
 import {IAuthData} from '@app/types';
-import useAppDispatch from '@src/shared/hooks/redux/useAppDispatch';
-import {useRegisterMutation} from '@src/store/api/authApi';
-import {IAuthState, setCredentials} from '@src/store/slice/authSlice';
-import InputForm from '@widgets/InputForm/InputForm';
-import NavigateLabel from '@widgets/NavigateLabel/NavigateLabel';
-import PostButton from '@widgets/PostButton/PostButton';
+import InputForm from '@features/InputForm/InputForm';
+import NavigateLabel from '@features/NavigateLabel/NavigateLabel';
+import PostButton from '@features/PostButton/PostButton';
+import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
+import {useRegisterMutation} from '@store/api/authApi';
+import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Register.styled';
 

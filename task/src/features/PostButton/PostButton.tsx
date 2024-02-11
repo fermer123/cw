@@ -2,7 +2,7 @@ import {FC, memo} from 'react';
 
 import LoginIcon from '@mui/icons-material/Login';
 
-import PostAuthButton from './PostButton_style';
+import PostAuthButton from './PostButton.styled';
 
 export interface IPostButtonProps {
   disabled: boolean;

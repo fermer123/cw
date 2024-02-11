@@ -1,7 +1,7 @@
 import {FC, memo} from 'react';
 import {FieldProps} from 'formik';
 
-import InputFormContent from './InputForm_style';
+import InputFormContent from './InputForm.styled';
 
 export interface IInputFormProps {
   label: string;

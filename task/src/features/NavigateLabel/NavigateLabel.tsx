@@ -1,6 +1,6 @@
 import {FC, memo} from 'react';
 
-import LabelNavigate from './NavigateLabel_style';
+import LabelNavigate from './NavigateLabel.styled';
 
 export interface INavigateLabel {
   label: string;

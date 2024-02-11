@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import {Spinner, SpinnerContainer} from './LoadingSpinner_style';
+import {Spinner, SpinnerContainer} from './LoadingSpinner.styled';
 
 const LoadingSpinner: FC = () => {
   return (

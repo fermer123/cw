@@ -1,15 +1,15 @@
+import {DefaultTheme} from 'styled-components';
+
 import {blue, blueGrey, grey} from '@mui/material/colors';
 
-interface ColorPalette {
-  blue: string;
-  grey: string;
-  default: string;
-}
-
-const colors: ColorPalette = {
-  blue: blue[500],
-  grey: grey[900],
-  default: blueGrey[100],
+export const darkThemeColors: DefaultTheme = {
+  primaryColor: blueGrey[100],
+  secondaryColor: blue[300],
+  backGroundColor: grey[900],
 };
 
-export default colors;
+export const lightThemeColors: DefaultTheme = {
+  primaryColor: grey[900],
+  secondaryColor: blue[300],
+  backGroundColor: blueGrey[100],
+};

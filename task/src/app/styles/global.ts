@@ -1,14 +1,14 @@
-import {createGlobalStyle} from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
 
-import colors from './default_variables';
+import {Box} from '@mui/system';
 
 const GlobalStyle = createGlobalStyle`
 
 body{
   font-style: normal;
   font-size: 16px;
-  color: ${colors.blue};
-  background-color: ${colors.grey};
+  color: ${({theme}) => theme.secondaryColor};
+  background-color: ${({theme}) => theme.backGroundColor};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -62,4 +62,8 @@ img {
   width: 0;
 }
 `;
+export const ContentContainer = styled(Box)`
+  margin-top: 3rem; /* Высота хедера */
+`;
+
 export default GlobalStyle;
