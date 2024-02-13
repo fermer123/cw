@@ -3,11 +3,13 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {authApi} from './api/authApi';
 import {wordsApi} from './api/wordsApi';
 import authSlice from './slice/authSlice';
+import themeSlice from './slice/themeSlice';
 
 const rootReducer = combineReducers({
   [wordsApi.reducerPath]: wordsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   auth: authSlice,
+  theme: themeSlice,
 });
 
 export const setupStore = () => {

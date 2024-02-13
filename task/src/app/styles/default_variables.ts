@@ -11,5 +11,5 @@ export const darkThemeColors: DefaultTheme = {
 export const lightThemeColors: DefaultTheme = {
   primaryColor: grey[900],
   secondaryColor: blue[300],
-  backGroundColor: blueGrey[100],
+  backGroundColor: grey[50],
 };

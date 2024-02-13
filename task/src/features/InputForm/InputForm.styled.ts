@@ -4,7 +4,7 @@ import {TextField} from '@mui/material';
 
 const InputFormContent = styled(TextField)(({theme}) => ({
   '& .MuiInputLabel-outlined': {
-    color: theme.secondaryColor,
+    color: theme.primaryColor,
     borderColor: `${theme.primaryColor}`,
   },
   '& .MuiOutlinedInput-notchedOutline': {

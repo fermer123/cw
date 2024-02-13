@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 body{
   font-style: normal;
   font-size: 16px;
-  color: ${({theme}) => theme.secondaryColor};
+  color: ${({theme}) => theme.primaryColor};
   background-color: ${({theme}) => theme.backGroundColor};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
