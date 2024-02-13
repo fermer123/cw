@@ -1,4 +1,4 @@
-import {FC, useCallback} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
@@ -14,8 +14,13 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Register.styled';
 
+const {default: SnackbarComponent} = await import(
+  '@features/Snackbar/SnackbarComponent'
+);
+
 const Register: FC = () => {
   const [register, {isError}] = useRegisterMutation();
+  const [open, setOpen] = useState<boolean>(false);
   const push = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -45,7 +50,7 @@ const Register: FC = () => {
         actions.setSubmitting(false);
         push('/');
       } catch (error) {
-        console.log('error', error);
+        setOpen(true);
       }
     },
     [dispatch, push, register],
@@ -56,46 +61,54 @@ const Register: FC = () => {
   }, [push]);
 
   return (
-    <Formik
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-      initialValues={{password: '', email: '', id: ''}}>
-      {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
-        <Form>
-          <Auth>
-            <Field
-              error={errors.email}
-              touched={touched.email}
-              label='Введите email'
-              name='email'
-              component={InputForm}
-            />
-            <Field
-              error={errors.password}
-              touched={touched.password}
-              label='Введите пароль'
-              name='password'
-              component={InputForm}
-            />
-            <PostButton
-              disabled={
-                !dirty ||
-                isSubmitting ||
-                !!(errors.email && touched.email) ||
-                !!(errors.password && touched.password)
-              }
-              onSubmit={handleSubmit}
-              label='SIGN IN'
-            />
-            {!!isError && <ErrorAlert label={isError} color='error' />}
-            <NavigateLabel
-              label='already have an account?'
-              switchAuth={switchAuthForm}
-            />
-          </Auth>
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        initialValues={{password: '', email: '', id: ''}}>
+        {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
+          <Form>
+            <Auth>
+              <Field
+                error={errors.email}
+                touched={touched.email}
+                label='Введите email'
+                name='email'
+                component={InputForm}
+              />
+              <Field
+                error={errors.password}
+                touched={touched.password}
+                label='Введите пароль'
+                name='password'
+                component={InputForm}
+              />
+              <PostButton
+                disabled={
+                  !dirty ||
+                  isSubmitting ||
+                  !!(errors.email && touched.email) ||
+                  !!(errors.password && touched.password)
+                }
+                onSubmit={handleSubmit}
+                label='SIGN IN'
+              />
+              {isError && <ErrorAlert label={isError} color='error' />}
+              <NavigateLabel
+                label='already have an account?'
+                switchAuth={switchAuthForm}
+              />
+            </Auth>
+          </Form>
+        )}
+      </Formik>
+      <SnackbarComponent
+        error
+        message='Something goes wrong'
+        open={open}
+        setOpen={setOpen}
+      />
+    </>
   );
 };
 

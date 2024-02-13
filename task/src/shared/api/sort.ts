@@ -1,4 +1,4 @@
-import {isNumberArray, isStringArray} from '@app/types';
+import {isNumberArray, isStringArray} from '@src/app/types';
 
 type TSortDirrection = 'asc' | 'desc';
 

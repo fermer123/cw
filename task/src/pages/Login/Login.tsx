@@ -1,4 +1,4 @@
-import {FC, useCallback} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {Field, Form, Formik, FormikHelpers} from 'formik';
 import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
@@ -14,10 +14,13 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
+const {default: SnackbarComponent} = await import(
+  '@features/Snackbar/SnackbarComponent'
+);
 const Login: FC = () => {
   const push = useNavigate();
   const [login, {isError}] = useLoginMutation();
-
+  const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const validationSchema = Yup.object().shape({
@@ -36,6 +39,9 @@ const Login: FC = () => {
       actions: FormikHelpers<IAuthData>,
     ): Promise<void> => {
       try {
+        if (values.email === 'qwe@mail.ru') {
+          throw new Error('тест');
+        }
         const user: IAuthState = (await login({
           email: values.email,
           password: values.password,
@@ -46,7 +52,7 @@ const Login: FC = () => {
         actions.setSubmitting(false);
         push('/');
       } catch (error: unknown) {
-        console.log(error);
+        setOpen(true);
       }
     },
     [login, push, dispatch],
@@ -57,47 +63,55 @@ const Login: FC = () => {
   }, [push]);
 
   return (
-    <Formik
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-      initialValues={{password: '', email: '', id: ''}}>
-      {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
-        <Form>
-          <Auth>
-            <Field
-              error={errors.email}
-              touched={touched.email}
-              label='Введите email'
-              name='email'
-              component={InputForm}
-            />
-            <Field
-              error={errors.password}
-              touched={touched.password}
-              label='Введите пароль'
-              name='password'
-              component={InputForm}
-            />
+    <>
+      <Formik
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        initialValues={{password: '', email: '', id: ''}}>
+        {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
+          <Form>
+            <Auth>
+              <Field
+                error={errors.email}
+                touched={touched.email}
+                label='Введите email'
+                name='email'
+                component={InputForm}
+              />
+              <Field
+                error={errors.password}
+                touched={touched.password}
+                label='Введите пароль'
+                name='password'
+                component={InputForm}
+              />
 
-            <PostButton
-              disabled={
-                !dirty ||
-                isSubmitting ||
-                !!(errors.email && touched.email) ||
-                !!(errors.password && touched.password)
-              }
-              onSubmit={handleSubmit}
-              label='LOG IN'
-            />
-            {!!isError && <ErrorAlert label={isError} color='error' />}
-            <NavigateLabel
-              label='don`t have an account?'
-              switchAuth={switchAuthForm}
-            />
-          </Auth>
-        </Form>
-      )}
-    </Formik>
+              <PostButton
+                disabled={
+                  !dirty ||
+                  isSubmitting ||
+                  !!(errors.email && touched.email) ||
+                  !!(errors.password && touched.password)
+                }
+                onSubmit={handleSubmit}
+                label='LOG IN'
+              />
+              {isError && <ErrorAlert label={isError} color='error' />}
+              <NavigateLabel
+                label='don`t have an account?'
+                switchAuth={switchAuthForm}
+              />
+            </Auth>
+          </Form>
+        )}
+      </Formik>
+      <SnackbarComponent
+        error
+        message='Something goes wrong'
+        open={open}
+        setOpen={setOpen}
+      />
+    </>
   );
 };
 
