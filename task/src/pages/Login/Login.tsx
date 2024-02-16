@@ -39,9 +39,6 @@ const Login: FC = () => {
       actions: FormikHelpers<IAuthData>,
     ): Promise<void> => {
       try {
-        if (values.email === 'qwe@mail.ru') {
-          throw new Error('тест');
-        }
         const user: IAuthState = (await login({
           email: values.email,
           password: values.password,
