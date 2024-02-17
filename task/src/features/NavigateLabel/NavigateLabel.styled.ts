@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 
 const LabelNavigate = styled(Link)(({theme}) => ({
   margin: '0 auto',
-  color: `${theme.backGroundColor}`,
+  color: `${theme.primaryColor}`,
   fontSize: '0.7rem',
 }));
 

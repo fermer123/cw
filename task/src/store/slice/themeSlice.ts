@@ -15,7 +15,7 @@ export interface IThemeState {
 
 const initialState: IThemeState = {
   theme:
-    (localStorage.getItem(THEME) as Themes) ?? (supportedThemes.dark as Themes),
+    (localStorage.getItem(THEME) as Themes) || (supportedThemes.dark as Themes),
 };
 
 const themeSlice = createSlice({
@@ -24,12 +24,12 @@ const themeSlice = createSlice({
   reducers: {
     setTheme(state) {
       state.theme = state.theme === supportedThemes.dark ? 'light' : 'dark';
-      localStorage.setItem(THEME, JSON.stringify(state.theme));
+      localStorage.setItem(THEME, state.theme);
     },
   },
 });
 export const {setTheme} = themeSlice.actions;
-export const useTheme = () => {
+export const useTheme = (): Themes => {
   return useAppSelector((state) => state.theme.theme);
 };
 export default themeSlice.reducer;

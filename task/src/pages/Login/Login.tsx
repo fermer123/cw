@@ -1,13 +1,14 @@
 import {FC, useCallback, useState} from 'react';
-import {Field, Form, Formik, FormikHelpers} from 'formik';
+import {Controller, useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
-import * as Yup from 'yup';
+import {z} from 'zod';
 
-import {IAuthData} from '@app/types';
 import InputForm from '@features/InputForm/InputForm';
 import NavigateLabel from '@features/NavigateLabel/NavigateLabel';
 import PostButton from '@features/PostButton/PostButton';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {defaultAuthValues, validationAuthSchema} from '@shared/consants';
 import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
 import {useLoginMutation} from '@store/api/authApi';
 import {IAuthState, setCredentials} from '@store/slice/authSlice';
@@ -23,36 +24,34 @@ const Login: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const validationSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(3, 'Слишком короткий пароль')
-      .max(20, 'Слишком длинный пароль')
-      .required('Поле не должо быть пустым'),
-    email: Yup.string()
-      .email('Неверный email')
-      .required('Поле не должо быть пустым'),
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isSubmitting, isValid},
+  } = useForm({
+    mode: 'onChange', // req
+    defaultValues: defaultAuthValues,
+    resolver: zodResolver(validationAuthSchema),
   });
 
   const onSubmit = useCallback(
-    async (
-      values: IAuthData,
-      actions: FormikHelpers<IAuthData>,
-    ): Promise<void> => {
+    async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
         const user: IAuthState = (await login({
-          email: values.email,
-          password: values.password,
+          email: data.email,
+          password: data.password,
           id: uuidv4(),
         }).unwrap()) as IAuthState;
         dispatch(setCredentials({name: user.name, token: user.token}));
-        actions.resetForm();
-        actions.setSubmitting(false);
+        reset();
         push('/');
       } catch (error: unknown) {
+        console.log(error);
         setOpen(true);
       }
     },
-    [login, push, dispatch],
+    [login, dispatch, reset, push],
   );
 
   const switchAuthForm = useCallback(() => {
@@ -60,55 +59,58 @@ const Login: FC = () => {
   }, [push]);
 
   return (
-    <>
-      <Formik
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        initialValues={{password: '', email: '', id: ''}}>
-        {({errors, touched, isSubmitting, dirty, handleSubmit}) => (
-          <Form>
-            <Auth>
-              <Field
-                error={errors.email}
-                touched={touched.email}
-                label='Введите email'
-                name='email'
-                component={InputForm}
-              />
-              <Field
-                error={errors.password}
-                touched={touched.password}
-                label='Введите пароль'
-                name='password'
-                component={InputForm}
-              />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Auth>
+        <Controller
+          name='email'
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({field, fieldState}) => (
+            <InputForm
+              {...field}
+              touchedFields={fieldState.isTouched}
+              error={fieldState.error?.message}
+              label='Введите email'
+            />
+          )}
+        />
 
-              <PostButton
-                disabled={
-                  !dirty ||
-                  isSubmitting ||
-                  !!(errors.email && touched.email) ||
-                  !!(errors.password && touched.password)
-                }
-                onSubmit={handleSubmit}
-                label='LOG IN'
-              />
-              {isError && <ErrorAlert label={isError} color='error' />}
-              <NavigateLabel
-                label='don`t have an account?'
-                switchAuth={switchAuthForm}
-              />
-            </Auth>
-          </Form>
-        )}
-      </Formik>
+        <Controller
+          name='password'
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({field, fieldState}) => (
+            <InputForm
+              {...field}
+              touchedFields={fieldState.isTouched}
+              error={fieldState.error?.message}
+              label='Введите пароль'
+            />
+          )}
+        />
+
+        <PostButton
+          disabled={!isValid || isSubmitting}
+          onSubmit={() => handleSubmit(onSubmit)}
+          label='LOG IN'
+        />
+        {isError && <ErrorAlert label={isError} color='error' />}
+        <NavigateLabel
+          label='don`t have an account?'
+          switchAuth={switchAuthForm}
+        />
+      </Auth>
       <SnackbarComponent
         error
         message='Something goes wrong'
         open={open}
         setOpen={setOpen}
       />
-    </>
+    </form>
   );
 };
 

@@ -1,30 +1,35 @@
 import {FC, memo} from 'react';
-import {FieldProps} from 'formik';
+import {ControllerFieldState, ControllerRenderProps} from 'react-hook-form';
 
 import InputFormContent from './InputForm.styled';
 
-export interface IInputFormProps {
+export interface IInputFormProps extends ControllerRenderProps {
+  error: ControllerFieldState['error']['message'];
+  touchedFields: ControllerFieldState['isTouched'];
+  value: string;
   label: string;
-  error: string;
-  touched: boolean;
 }
 
-const InputForm: FC<IInputFormProps & FieldProps> = ({
-  label,
+const InputForm: FC<IInputFormProps> = ({
   error,
-  field, // { name, value, onChange, onBlur }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  form, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-  touched,
+  name,
+  onBlur,
+  onChange,
+  value,
+  touchedFields,
+  label,
 }) => {
   return (
     <InputFormContent
-      {...field}
       label={label}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
       fullWidth
-      error={!!error && !!touched}
+      name={name}
+      error={!!error && !!touchedFields}
       variant='outlined'
-      helperText={!!error && !!touched ? error : null}
+      helperText={!!error && !!touchedFields ? error : null}
       data-testid='textField'
     />
   );
