@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 
 import {Box} from '@mui/system';
 
@@ -10,6 +10,7 @@ const spinnerAnimation = keyframes`
     transform: rotate(360deg);
   }
 `;
+
 export const SpinnerContainer = styled(Box)`
   height: 100vh;
   width: 100%;
@@ -18,11 +19,13 @@ export const SpinnerContainer = styled(Box)`
   justify-content: center;
 `;
 
-export const Spinner = styled(Box)(({theme}) => ({
-  width: '75px',
-  height: '75px',
-  border: `10px solid ${theme.primaryColor}`,
-  borderTop: `10px solid ${theme.backGroundColor}`,
-  borderRadius: '50%',
-  // animation: `${spinnerAnimation} 1.5s linear infinite`,
-}));
+export const Spinner = styled(Box)(
+  ({theme}) => css`
+    width: 75px;
+    height: 75px;
+    border: 10px solid ${theme.primaryColor};
+    border-top: 10px solid ${theme.backGroundColor};
+    border-radius: 50%;
+    animation: ${spinnerAnimation} 1.5s linear infinite;
+  `,
+);
