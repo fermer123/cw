@@ -47,7 +47,6 @@ const Login: FC = () => {
         reset();
         push('/');
       } catch (error: unknown) {
-        console.log(error);
         setOpen(true);
       }
     },

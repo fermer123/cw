@@ -4,7 +4,11 @@ import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 
 import {BuildOption} from './types/config';
 
-function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
+function buildPlugins({
+  paths,
+  isDev,
+  analyzerPort,
+}: BuildOption): WebpackPluginInstance[] {
   return [
     new HtmlWebpackPlugin({
       template: paths.template,
@@ -19,6 +23,7 @@ function buildPlugins({paths, isDev}: BuildOption): WebpackPluginInstance[] {
           openAnalyzer: true,
           analyzerMode: 'server',
           reportFilename: paths.analyzer,
+          analyzerPort,
         })
       : undefined,
   ];
