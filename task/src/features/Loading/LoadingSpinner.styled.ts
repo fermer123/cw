@@ -1,6 +1,6 @@
 import styled, {css, keyframes} from 'styled-components';
 
-import {Box} from '@mui/system';
+import {Box} from '@mui/material';
 
 const spinnerAnimation = keyframes`
   0% {

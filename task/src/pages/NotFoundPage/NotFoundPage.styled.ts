@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import {Box} from '@mui/system';
+import {Box} from '@mui/material';
 
 const NotFoundPageContainer = styled(Box)`
   display: flex;

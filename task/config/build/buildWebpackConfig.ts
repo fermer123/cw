@@ -17,6 +17,7 @@ function buildWebpackConfig(option: BuildOption): Configuration {
       filename: '[name].[contenthash].js',
       clean: true,
       chunkFilename: '[name].[contenthash].js',
+      publicPath: 'auto',
     },
 
     optimization: buildOptimization(),

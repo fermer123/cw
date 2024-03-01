@@ -5,7 +5,7 @@ import {BuildEnv, BuildPaths} from './config/build/types/config';
 
 export default (env: BuildEnv) => {
   const paths: BuildPaths = {
-    entry: path.join(__dirname, 'src/index.tsx'),
+    entry: path.join(__dirname, 'src/index.ts'),
     output: path.join(__dirname, 'build'),
     template: path.join(__dirname, 'public/index.html'),
     analyzer: path.join(__dirname, 'dist/bundle-analysis.html'),

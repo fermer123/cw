@@ -1,4 +1,4 @@
-import {FC, useCallback, useState} from 'react';
+import React, {FC, lazy, useCallback, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
@@ -15,9 +15,7 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
-const {default: SnackbarComponent} = await import(
-  '@features/Snackbar/SnackbarComponent'
-);
+const SnackbarComponent = lazy(() => import('snackbar/SnackbarComponent'));
 const Login: FC = () => {
   const push = useNavigate();
   const [login, {isError}] = useLoginMutation();
@@ -30,7 +28,7 @@ const Login: FC = () => {
     reset,
     formState: {isSubmitting, isValid},
   } = useForm({
-    mode: 'onChange', // req
+    mode: 'onChange',
     defaultValues: defaultAuthValues,
     resolver: zodResolver(validationAuthSchema),
   });
@@ -43,6 +41,7 @@ const Login: FC = () => {
           password: data.password,
           id: uuidv4(),
         }).unwrap()) as IAuthState;
+
         dispatch(setCredentials({name: user.name, token: user.token}));
         reset();
         push('/');
@@ -58,58 +57,60 @@ const Login: FC = () => {
   }, [push]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Auth>
-        <Controller
-          name='email'
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field, fieldState}) => (
-            <InputForm
-              {...field}
-              touchedFields={fieldState.isTouched}
-              error={fieldState.error?.message}
-              label='Введите email'
-            />
-          )}
-        />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Auth>
+          <Controller
+            name='email'
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field, fieldState}) => (
+              <InputForm
+                {...field}
+                touchedFields={fieldState.isTouched}
+                error={fieldState.error?.message}
+                label='Введите email'
+              />
+            )}
+          />
 
-        <Controller
-          name='password'
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field, fieldState}) => (
-            <InputForm
-              {...field}
-              touchedFields={fieldState.isTouched}
-              error={fieldState.error?.message}
-              label='Введите пароль'
-            />
-          )}
-        />
+          <Controller
+            name='password'
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field, fieldState}) => (
+              <InputForm
+                {...field}
+                touchedFields={fieldState.isTouched}
+                error={fieldState.error?.message}
+                label='Введите пароль'
+              />
+            )}
+          />
 
-        <PostButton
-          disabled={!isValid || isSubmitting}
-          onSubmit={() => handleSubmit(onSubmit)}
-          label='LOG IN'
-        />
-        {isError && <ErrorAlert label={isError} color='error' />}
-        <NavigateLabel
-          label='don`t have an account?'
-          switchAuth={switchAuthForm}
-        />
-      </Auth>
+          <PostButton
+            disabled={!isValid || isSubmitting}
+            onSubmit={() => handleSubmit(onSubmit)}
+            label='LOG IN'
+          />
+          {isError && <ErrorAlert label={isError} color='error' />}
+          <NavigateLabel
+            label='don`t have an account?'
+            switchAuth={switchAuthForm}
+          />
+        </Auth>
+      </form>
       <SnackbarComponent
         error
         message='Something goes wrong'
         open={open}
         setOpen={setOpen}
       />
-    </form>
+    </>
   );
 };
 

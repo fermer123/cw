@@ -41,7 +41,9 @@
     "@typescript-eslint",
     "jest",
     "simple-import-sort",
-    "eslint-plugin-react-hooks"
+    "eslint-plugin-react-hooks",
+    "jsx-a11y",
+    "import"
   ],
   "rules": {
     "@typescript-eslint/no-floating-promises": "off",

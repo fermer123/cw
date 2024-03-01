@@ -2,7 +2,7 @@ import 'styled-components';
 
 declare const isDev: boolean;
 declare const baseURL: string;
-
+declare const microfrontend: string;
 declare module 'styled-components' {
   export interface DefaultTheme {
     primaryColor: string;
@@ -10,6 +10,12 @@ declare module 'styled-components' {
     backGroundColor: string;
   }
 }
+declare module 'snackbar/SnackbarComponent' {
+  const SnackbarComponent: React.ComponentType; // Предполагая, что компонент является React-компонентом
+
+  export default SnackbarComponent;
+}
+
 // declare module '*.ttf';
 // declare module '*.png';
 // declare module '*.jpg';

@@ -4,12 +4,12 @@ function buildOptimization() {
     usedExports: true,
     minimize: true,
     splitChunks: {
-      chunks: 'all' as const,
+      chunks: 'async' as const,
       cacheGroups: {
         vendor: {
           test: /node_modules/,
           name: 'vendors',
-          chunks: 'all' as const,
+          chunks: 'async' as const,
           enforce: true,
         },
       },

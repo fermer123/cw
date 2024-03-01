@@ -1,6 +1,6 @@
 import styled, {createGlobalStyle} from 'styled-components';
 
-import {Box} from '@mui/system';
+import {Box} from '@mui/material';
 
 const GlobalStyle = createGlobalStyle`
 
