@@ -16,6 +16,7 @@ function buildPlugins({
       remotes: {
         snackbar: 'snackbar@http://localhost:3002/remoteEntry.js',
       },
+      // lerna workspaces
       shared: {
         react: {
           singleton: true,

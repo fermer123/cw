@@ -16,6 +16,7 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 import {Auth, ErrorAlert} from './Login.styled';
 
 const SnackbarComponent = lazy(() => import('snackbar/SnackbarComponent'));
+
 const Login: FC = () => {
   const push = useNavigate();
   const [login, {isError}] = useLoginMutation();
@@ -32,7 +33,7 @@ const Login: FC = () => {
     defaultValues: defaultAuthValues,
     resolver: zodResolver(validationAuthSchema),
   });
-
+  // попробовать использовать динамический префетч (Dynamic Prefetch)
   const onSubmit = useCallback(
     async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
