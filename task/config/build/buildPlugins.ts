@@ -13,8 +13,13 @@ function buildPlugins({
 }: BuildOption): WebpackPluginInstance[] {
   return [
     new container.ModuleFederationPlugin({
+      name: 'store',
+      filename: 'remoteEntry.js',
       remotes: {
         snackbar: 'snackbar@http://localhost:3002/remoteEntry.js',
+      },
+      exposes: {
+        './setupStore': paths.store,
       },
       // lerna workspaces
       shared: {
@@ -56,12 +61,11 @@ function buildPlugins({
     new webpack.DefinePlugin({
       isDev: JSON.stringify(isDev),
       baseURL: JSON.stringify('http://localhost:3000/'),
-      microfrontend: JSON.stringify('http://localhost:3002'),
     }),
     isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
     isDev
       ? new BundleAnalyzerPlugin({
-          openAnalyzer: true,
+          openAnalyzer: false,
           analyzerMode: 'server',
           reportFilename: paths.analyzer,
           analyzerPort,

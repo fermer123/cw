@@ -15,11 +15,32 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
-const SnackbarComponent = lazy(() => import('snackbar/SnackbarComponent'));
+const loadSnackbarComponent = async () => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const module = await import('snackbar/SnackbarComponent');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    return {default: module.default};
+  } catch (error) {
+    return {default: () => <div>Альтернативный JSX элемент</div>};
+  }
+};
+// Загрузка компонента SnackbarComponent с обработкой ошибки
 
+const SnackbarComponent = lazy(() => loadSnackbarComponent());
+
+// const dynamicFederation = async (scope: string, module: string) => {
+//   const container = window[scope]; // or get the container somewhere else
+//   // Initialize the container, it may provide shared modules
+//   await container.init(__webpack_share_scopes__.default);
+//   return container.get(module).then((factory) => {
+//     const Module = factory();
+//     return Module;
+//   });
+// };
 const Login: FC = () => {
   const push = useNavigate();
-  const [login, {isError}] = useLoginMutation();
+  const [login, {isError, error: isErrorResonse}] = useLoginMutation();
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -37,13 +58,15 @@ const Login: FC = () => {
   const onSubmit = useCallback(
     async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
-        const user: IAuthState = (await login({
+        const user: IAuthState = await login({
           email: data.email,
           password: data.password,
           id: uuidv4(),
-        }).unwrap()) as IAuthState;
+        }).unwrap();
+        if (user) {
+          dispatch(setCredentials({name: user.name, token: user.token}));
+        }
 
-        dispatch(setCredentials({name: user.name, token: user.token}));
         reset();
         push('/');
       } catch (error: unknown) {
@@ -76,7 +99,6 @@ const Login: FC = () => {
               />
             )}
           />
-
           <Controller
             name='password'
             control={control}
@@ -92,13 +114,14 @@ const Login: FC = () => {
               />
             )}
           />
-
           <PostButton
             disabled={!isValid || isSubmitting}
             onSubmit={() => handleSubmit(onSubmit)}
             label='LOG IN'
           />
-          {isError && <ErrorAlert label={isError} color='error' />}
+          {isError && 'data' in isErrorResonse && (
+            <ErrorAlert label={isErrorResonse.data as string} color='error' />
+          )}
           <NavigateLabel
             label='don`t have an account?'
             switchAuth={switchAuthForm}

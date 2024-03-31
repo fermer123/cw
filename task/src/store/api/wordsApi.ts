@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const wordsApi = createApi({
   reducerPath: 'wordsApi',
-  baseQuery: fetchBaseQuery({baseUrl: baseURL}),
+  baseQuery: fetchBaseQuery({baseUrl: baseURL as string}),
   tagTypes: ['words'],
   endpoints: (build) => ({
     getWords: build.query<IWord[], string>({

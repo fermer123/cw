@@ -1,9 +1,9 @@
 import {FC, lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
+import ProtectedRoute from '@app/ProtectedRoute/ProtectedRoute';
 import {routeConfig} from '@app/routeConfig/routeConfig';
 import LoadingSpinner from '@features/Loading/LoadingSpinner';
-import ProtectedRoute from '@features/ProtectedRoute/ProtectedRoute';
 import {useAuth} from '@shared/hooks/redux/useAuth';
 
 import {ContentContainer} from '../styles/global';

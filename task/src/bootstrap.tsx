@@ -8,7 +8,7 @@ import Theme from '@app/styles/Theme';
 
 import {setupStore} from './store';
 
-const store = setupStore();
+export const store = setupStore();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>

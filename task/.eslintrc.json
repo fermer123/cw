@@ -3,8 +3,12 @@
     "browser": true,
     "es2021": true,
     "jest": true
+    // "node": true
   },
-
+  // "globals": {
+  //   "isDev": "readonly",
+  //   "baseURL": "readonly"
+  // },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -45,6 +49,16 @@
     "jsx-a11y",
     "import"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
     "@typescript-eslint/no-floating-promises": "off",
     "react/jsx-props-no-spreading": "off",

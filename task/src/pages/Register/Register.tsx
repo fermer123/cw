@@ -39,11 +39,11 @@ const Register: FC = () => {
   const onSubmit = useCallback(
     async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
-        const user: IAuthState = (await register({
+        const user: IAuthState = await register({
           email: data.email,
           password: data.password,
           id: uuidv4(),
-        }).unwrap()) as IAuthState;
+        }).unwrap();
         dispatch(setCredentials({name: user.name, token: user.token}));
         reset();
 
