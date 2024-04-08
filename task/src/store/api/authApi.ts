@@ -6,7 +6,7 @@ import {IAuthState} from '../slice/authSlice';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: baseURL as string,
+    baseUrl: baseURL,
   }),
   tagTypes: ['auth'],
   endpoints: (build) => ({

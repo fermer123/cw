@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 export const setupStore = () => {
   const store = configureStore({
     reducer: rootReducer,
-    devTools: isDev as boolean,
+    devTools: isDev,
     middleware: (getDefaultMiddleWare) =>
       getDefaultMiddleWare().concat(wordsApi.middleware, authApi.middleware),
   });

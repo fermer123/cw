@@ -28,8 +28,8 @@
     }
   ],
   "globals": {
-    "isDev": true,
-    "baseURL": true
+    "isDev": "readonly",
+    "baseURL": "readonly"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
