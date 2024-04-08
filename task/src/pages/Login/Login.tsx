@@ -1,4 +1,4 @@
-import React, {FC, lazy, useCallback, useState} from 'react';
+import {FC, lazy, useCallback, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
@@ -15,19 +15,19 @@ import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
-const loadSnackbarComponent = async () => {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const module = await import('snackbar/SnackbarComponent');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    return {default: module.default};
-  } catch (error) {
-    return {default: () => <div>Альтернативный JSX элемент</div>};
-  }
-};
+// const loadSnackbarComponent = async () => {
+//   try {
+//     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+//     // const module = await import('snackbar/SnackbarComponent');
+//     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+//     return {default: module.default};
+//   } catch (error) {
+//     return {default: () => <div>Альтернативный JSX элемент</div>};
+//   }
+// };
 // Загрузка компонента SnackbarComponent с обработкой ошибки
 
-const SnackbarComponent = lazy(() => loadSnackbarComponent());
+// const SnackbarComponent = lazy(() => loadSnackbarComponent());
 
 // const dynamicFederation = async (scope: string, module: string) => {
 //   const container = window[scope]; // or get the container somewhere else
@@ -128,12 +128,12 @@ const Login: FC = () => {
           />
         </Auth>
       </form>
-      <SnackbarComponent
+      {/* <SnackbarComponent
         error
         message='Something goes wrong'
         open={open}
         setOpen={setOpen}
-      />
+      /> */}
     </>
   );
 };

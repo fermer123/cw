@@ -5,8 +5,6 @@
     }
   },
   "compilerOptions": {
-    // "declaration": true,
-    // "typeRoots": ["./node_modules/@types", "global.d.ts"],
     "outDir": "./dist",
     "module": "ESNext",
     "moduleResolution": "node",

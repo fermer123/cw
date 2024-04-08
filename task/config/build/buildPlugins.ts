@@ -1,3 +1,4 @@
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack, {container, WebpackPluginInstance} from 'webpack';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
@@ -58,6 +59,7 @@ function buildPlugins({
     new HtmlWebpackPlugin({
       template: paths.template,
     }),
+    isDev ? new ForkTsCheckerWebpackPlugin() : undefined,
     new webpack.DefinePlugin({
       isDev: JSON.stringify(isDev),
       baseURL: JSON.stringify('http://localhost:3000/'),

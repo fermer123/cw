@@ -3,12 +3,7 @@
     "browser": true,
     "es2021": true,
     "jest": true
-    // "node": true
   },
-  // "globals": {
-  //   "isDev": "readonly",
-  //   "baseURL": "readonly"
-  // },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -21,6 +16,7 @@
     "plugin:jest/recommended",
     "plugin:jest/style",
     "plugin:testing-library/react"
+    // 'plugin:i18next/recommended',
   ],
   "overrides": [
     {
@@ -31,6 +27,10 @@
       "extends": ["plugin:testing-library/react"]
     }
   ],
+  "globals": {
+    "isDev": true,
+    "baseURL": true
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",

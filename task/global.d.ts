@@ -1,10 +1,10 @@
 import 'styled-components';
 
-declare module 'snackbar/SnackbarComponent';
-
-declare const isDev: boolean;
-declare const baseURL: string;
-
+declare global {
+  declare const isDev: boolean;
+  declare const baseURL: string;
+  declare module 'snackbar/SnackbarComponent';
+}
 declare module 'styled-components' {
   export interface DefaultTheme {
     primaryColor: string;
@@ -26,3 +26,13 @@ declare module 'styled-components' {
 //   const content: any;
 //   export default content;
 // }
+// declare module '*.scss' {
+//   interface IClassNames {
+//       [className: string]: string
+//   }
+//   const classNames: IClassNames;
+//   export = classNames;
+// }
+// type DeepPartial<T> = T extends object ? {
+//   [P in keyof T]?: DeepPartial<T[P]>;
+// } : T;
