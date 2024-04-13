@@ -6,7 +6,6 @@ export interface BuildPaths {
   template: string;
   analyzer: string;
   tsconfigPath: string;
-  store: string;
 }
 
 export interface BuildEnv {
