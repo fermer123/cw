@@ -1,7 +1,7 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
-import {authApi} from './api/authApi';
-import {wordsApi} from './api/wordsApi';
+import {authApi} from './api/authApi/authApi';
+import {wordsApi} from './api/wordsApi/wordsApi';
 import authSlice from './slice/authSlice';
 import themeSlice from './slice/themeSlice';
 

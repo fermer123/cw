@@ -1,7 +1,7 @@
-import {IAuthData} from '@app/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
+import {IAuthState} from '@src/store/slice/authSlice';
 
-import {IAuthState} from '../slice/authSlice';
+import {IAuthDataRequest} from '../types/types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -10,7 +10,7 @@ export const authApi = createApi({
   }),
   tagTypes: ['auth'],
   endpoints: (build) => ({
-    login: build.mutation<IAuthState, IAuthData>({
+    login: build.mutation<IAuthState, IAuthDataRequest>({
       query: (body) => ({
         url: '/login',
         method: 'POST',
@@ -18,7 +18,7 @@ export const authApi = createApi({
       }),
     }),
 
-    register: build.mutation<IAuthState, IAuthData>({
+    register: build.mutation<IAuthState, IAuthDataRequest>({
       query: (body) => ({
         url: '/register',
         method: 'POST',

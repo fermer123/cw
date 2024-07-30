@@ -8,9 +8,9 @@ import InputForm from '@features/InputForm/InputForm';
 import NavigateLabel from '@features/NavigateLabel/NavigateLabel';
 import PostButton from '@features/PostButton/PostButton';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {defaultAuthValues, validationAuthSchema} from '@shared/consants';
 import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
-import {useRegisterMutation} from '@store/api/authApi';
+import {defaultAuthValues, validationAuthSchema} from '@src/shared/constants';
+import {useRegisterMutation} from '@src/store/api/authApi/authApi';
 import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Register.styled';

@@ -4,7 +4,10 @@ import {v4 as uuidv4} from 'uuid';
 
 import LoadingSpinner from '@features/Loading/LoadingSpinner';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
-import {useAddWordsMutation, useGetWordsQuery} from '@store/api/wordsApi';
+import {
+  useAddWordsMutation,
+  useGetWordsQuery,
+} from '@src/store/api/wordsApi/wordsApi';
 
 import {HomeContainer} from './Home.styled';
 

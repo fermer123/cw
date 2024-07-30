@@ -1,9 +1,3 @@
-export interface IAuthData {
-  email: string;
-  password: string;
-  id: string;
-}
-
 // wordsApi
 export interface IWord {
   id: string;

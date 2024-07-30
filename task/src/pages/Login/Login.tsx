@@ -8,17 +8,17 @@ import InputForm from '@features/InputForm/InputForm';
 import NavigateLabel from '@features/NavigateLabel/NavigateLabel';
 import PostButton from '@features/PostButton/PostButton';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {defaultAuthValues, validationAuthSchema} from '@shared/consants';
 import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
 import SnackbarComponent from '@src/features/Snackbar/SnackbarComponent';
-import {useLoginMutation} from '@store/api/authApi';
+import {defaultAuthValues, validationAuthSchema} from '@src/shared/constants';
+import {useLoginMutation} from '@src/store/api/authApi/authApi';
 import {IAuthState, setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
 const Login: FC = () => {
   const push = useNavigate();
-  const [login, {isError, error: isErrorResonse}] = useLoginMutation();
+  const [login, {isError, error: isErrorResponse}] = useLoginMutation();
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -97,8 +97,8 @@ const Login: FC = () => {
             onSubmit={() => handleSubmit(onSubmit)}
             label='LOG IN'
           />
-          {isError && 'data' in isErrorResonse && (
-            <ErrorAlert label={isErrorResonse.data as string} color='error' />
+          {isError && 'data' in isErrorResponse && (
+            <ErrorAlert label={isErrorResponse.data as string} color='error' />
           )}
           <NavigateLabel
             label='don`t have an account?'
