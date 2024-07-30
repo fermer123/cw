@@ -1,12 +1,3 @@
-// wordsApi
-export interface IWord {
-  id: string;
-  value: string;
-}
-export interface IWords {
-  words: IWord[];
-}
-
 export const isStringArray = (arr: unknown): arr is string[] => {
   if (Array.isArray(arr) && arr.every((e) => typeof e === 'string')) {
     return true;

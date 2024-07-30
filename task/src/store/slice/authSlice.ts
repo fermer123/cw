@@ -4,7 +4,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 const USER = 'user';
 const ACCESS_KEY = 'access';
 
-export interface IAuthState {
+export interface IInitialState {
   name: string;
   token: string;
 }
@@ -19,7 +19,7 @@ export type IAuthPayloadError = {
   data: string;
 };
 
-const initialState: IAuthState = {
+const initialState: IInitialState = {
   name: localStorage.getItem(USER) ?? '',
   token: localStorage.getItem(ACCESS_KEY) ?? '',
 };
@@ -34,6 +34,12 @@ const authSlice = createSlice({
       state.token = token;
       localStorage.setItem(USER, JSON.stringify(action.payload.name));
       localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.token));
+    },
+    logout: (state) => {
+      state.name = null;
+      state.token = null;
+      localStorage.removeItem(USER);
+      localStorage.removeItem(ACCESS_KEY);
     },
   },
   // extraReducers: (builder) => {
@@ -53,5 +59,5 @@ const authSlice = createSlice({
   // );
   // },
 });
-export const {setCredentials} = authSlice.actions;
+export const {setCredentials, logout} = authSlice.actions;
 export default authSlice.reducer;

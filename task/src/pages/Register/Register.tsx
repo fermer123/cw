@@ -10,8 +10,9 @@ import PostButton from '@features/PostButton/PostButton';
 import {zodResolver} from '@hookform/resolvers/zod';
 import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
 import {defaultAuthValues, validationAuthSchema} from '@src/shared/constants';
-import {useRegisterMutation} from '@src/store/api/authApi/authApi';
-import {IAuthState, setCredentials} from '@store/slice/authSlice';
+import {useRegisterMutation} from '@store/api/authApi/authApi';
+import {IAuthDataResponse} from '@store/api/types/types';
+import {setCredentials} from '@store/slice/authSlice';
 
 import {Auth, ErrorAlert} from './Register.styled';
 
@@ -39,12 +40,11 @@ const Register: FC = () => {
   const onSubmit = useCallback(
     async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
-        const user: IAuthState = await register({
+        await register({
           email: data.email,
           password: data.password,
           id: uuidv4(),
-        }).unwrap();
-        dispatch(setCredentials({name: user.name, token: user.token}));
+        });
         reset();
 
         push('/');

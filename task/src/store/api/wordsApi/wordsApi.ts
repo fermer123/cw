@@ -1,5 +1,6 @@
-import {IWord} from '@app/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+
+import type {IWord} from '../types/types';
 
 export const wordsApi = createApi({
   reducerPath: 'wordsApi',

@@ -8,11 +8,9 @@ import InputForm from '@features/InputForm/InputForm';
 import NavigateLabel from '@features/NavigateLabel/NavigateLabel';
 import PostButton from '@features/PostButton/PostButton';
 import {zodResolver} from '@hookform/resolvers/zod';
-import useAppDispatch from '@shared/hooks/redux/useAppDispatch';
+import {defaultAuthValues, validationAuthSchema} from '@shared/constants';
 import SnackbarComponent from '@src/features/Snackbar/SnackbarComponent';
-import {defaultAuthValues, validationAuthSchema} from '@src/shared/constants';
-import {useLoginMutation} from '@src/store/api/authApi/authApi';
-import {IAuthState, setCredentials} from '@store/slice/authSlice';
+import {useLoginMutation} from '@store/api/authApi/authApi';
 
 import {Auth, ErrorAlert} from './Login.styled';
 
@@ -20,7 +18,6 @@ const Login: FC = () => {
   const push = useNavigate();
   const [login, {isError, error: isErrorResponse}] = useLoginMutation();
   const [open, setOpen] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -36,22 +33,18 @@ const Login: FC = () => {
   const onSubmit = useCallback(
     async (data: z.infer<typeof validationAuthSchema>): Promise<void> => {
       try {
-        const user: IAuthState = await login({
+        await login({
           email: data.email,
           password: data.password,
           id: uuidv4(),
-        }).unwrap();
-        if (user) {
-          dispatch(setCredentials({name: user.name, token: user.token}));
-        }
-
+        });
         reset();
         push('/');
       } catch (error: unknown) {
         setOpen(true);
       }
     },
-    [login, dispatch, reset, push],
+    [login, reset, push],
   );
 
   const switchAuthForm = useCallback(() => {

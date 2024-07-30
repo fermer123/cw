@@ -45,9 +45,11 @@
     "@typescript-eslint",
     "jest",
     "simple-import-sort",
+    "unused-imports",
     "eslint-plugin-react-hooks",
     "jsx-a11y",
-    "import"
+    "import",
+    "prettier"
   ],
   "settings": {
     "react": {
@@ -60,9 +62,31 @@
     }
   },
   "rules": {
+    "no-debugger": "warn",
+    "prefer-const": "warn",
     "@typescript-eslint/no-floating-promises": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-uses-react": "off",
+    "no-empty-pattern": "warn",
+    "object-shorthand": "warn",
+    "no-unused-vars": "off",
+    "no-extra-boolean-cast": "warn",
+    "no-empty": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-anonymous-default-export": [
+      "error",
+      {
+        "allowAnonymousFunction": true
+      }
+    ],
+
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
     "@typescript-eslint/no-misused-promises": [
