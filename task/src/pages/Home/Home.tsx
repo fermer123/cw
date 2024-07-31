@@ -24,7 +24,6 @@ const Home: FC = () => {
   }, [addWords, newWord]);
 
   if (isError) return <NotFoundPage />;
-
   return (
     <HomeContainer>
       {isLoading && <LoadingSpinner />}
